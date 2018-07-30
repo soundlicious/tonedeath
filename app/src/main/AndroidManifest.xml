@@ -9,13 +9,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main.MainActivity">
+        <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".learning.InitFinalListActivity"
+            android:label="@string/title_initfinal_list"
+            android:parentActivityName=".main.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".learning.InitFinalDetailActivity"
+            android:label="@string/title_initfinal_detail"
+            android:parentActivityName=".learning.InitFinalListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
+        </activity>
+        <activity android:name=".learning.ListeningActivity" />
+
+        <receiver android:name=".uselesswidget.UselessWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/useless_widget_info" />
+        </receiver>
+
+        <activity android:name=".practice.PracticeActivity"></activity>
     </application>
 
 </manifest>

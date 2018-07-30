@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ToneDeath</string>
+    <string name="title_initfinal_list">InitFinals</string>
+    <string name="title_initfinal_detail">InitFinal Detail</string>
+    <string name="appwidget_text">Hey i\'m a useless (mandatory) widget!</string>
+    <string name="add_widget">Add widget</string>
 </resources>
