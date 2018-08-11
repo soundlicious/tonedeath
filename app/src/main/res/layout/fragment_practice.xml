@@ -12,7 +12,8 @@
         android:layout_height="80dp"
         android:src="@drawable/ic_corner_top_left"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/corner" />
 
     <ImageView
         android:id="@+id/imageView_practice_corner_right"
@@ -21,7 +22,8 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_corner_bottom_right"
         app:layout_constraintBottom_toTopOf="@+id/button_practice_tone2"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/corner" />
 
     <ImageButton
         android:id="@+id/button_practice_tone1"
@@ -36,7 +38,8 @@
         app:layout_constraintEnd_toStartOf="@+id/button_practice_tone2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play"
+        android:contentDescription="@string/tone1" />
 
     <ImageButton
         android:id="@+id/button_practice_tone2"
@@ -50,7 +53,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_practice_tone1"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play"
+        android:contentDescription="@string/tone2" />
 
     <ImageButton
         android:id="@+id/button_practice_tone3"
@@ -64,7 +68,8 @@
         app:layout_constraintEnd_toStartOf="@+id/button_practice_tone4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone1" />
+        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone1"
+        android:contentDescription="@string/tone3" />
 
     <ImageButton
         android:id="@+id/button_practice_tone4"
@@ -77,7 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_practice_tone3"
-        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone2" />
+        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone2"
+        android:contentDescription="@string/tone4" />
 
     <ImageView
         android:id="@+id/imageView_practice_play"
@@ -91,7 +97,8 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent=".5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/play" />
 
 
     <ImageView
@@ -102,7 +109,8 @@
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_coin"
         app:layout_constraintEnd_toStartOf="@+id/textView_practice_score"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/coin" />
 
     <TextView
         android:id="@+id/textView_practice_score"
@@ -111,7 +119,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="1"
+        tools:text="1"
         app:layout_constraintBottom_toBottomOf="@+id/imageView_practice_coin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView_practice_coin" />

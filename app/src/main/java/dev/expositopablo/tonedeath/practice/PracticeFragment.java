@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,28 +31,25 @@ import dev.expositopablo.tonedeath.data.commons.Constants;
 public class PracticeFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.button_practice_tone1)
-    ImageButton tone1;
+    protected ImageButton tone1;
     @BindView(R.id.button_practice_tone2)
-    ImageButton tone2;
+    protected ImageButton tone2;
     @BindView(R.id.button_practice_tone3)
-    ImageButton tone3;
+    protected ImageButton tone3;
     @BindView(R.id.button_practice_tone4)
-    ImageButton tone4;
+    protected ImageButton tone4;
     @BindView(R.id.imageView_practice_play)
-    ImageView play;
+    protected ImageView play;
     @BindView(R.id.textView_practice_score)
-    TextView score;
+    protected TextView score;
     @BindView(R.id.imageView_practice_coin)
-    ImageView coin;
+    protected ImageView coin;
 
     private MediaPlayer mediaPlayer;
     private PracticeCallback mListener;
     private PracticeViewModel viewModel;
     private ArrayList<View> animationSet;
-    private String currentTone;
-
-    public PracticeFragment() {
-    }
+    private String currentTone; // Will be used once I have audio file
 
     //region Lifecycle
     @Override
@@ -64,12 +60,11 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.i("dev.practice", "Fragment : onAttach");
         if (context instanceof PracticeCallback) {
             mListener = (PracticeCallback) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement PracticeCallback");
         }
     }
 
@@ -79,8 +74,6 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_practice, container, false);
         ButterKnife.bind(this, view);
-        Log.i("dev.practice", "Fragment : onCreateView");
-
         return view;
     }
 
@@ -103,8 +96,6 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i("dev.practice", "Fragment : onViewCreated");
-
     }
 
     private void setViewModel() {
@@ -115,13 +106,11 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("dev.practice", "Fragment : onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.i("dev.practice", "Fragment : onPause");
         if (mediaPlayer != null) {
             mediaPlayer.release();
         }
@@ -130,12 +119,11 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("dev.practice", "Fragment : onDestroy");
     }
+
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.i("dev.practice", "Fragment : onDetach");
         mListener = null;
     }
 
@@ -143,9 +131,7 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
 
     //region Observer
     private void getCurrentTone(){
-        viewModel.observeTone().observe(getActivity(), tone -> {
-            this.currentTone = tone;
-        });
+        viewModel.observeTone().observe(getActivity(), tone -> this.currentTone = tone);
     }
     private void displayScore() {
         viewModel.observeScore().observe(getActivity(), value -> {
@@ -200,8 +186,6 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     //region Audio
     public void playSound() {
         disableClick();
-        if (viewModel == null)
-            Log.i("dev.Practice", "Fragment : viewModel is null");
         String fileName = viewModel.getTone();
         int resID = getResources().getIdentifier(fileName, "raw", getContext().getPackageName());
         mediaPlayer = MediaPlayer.create(getContext(), resID);
@@ -248,14 +232,6 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
                 break;
         }
         viewModel.checkAnswer(tone);
-//        if (viewModel.isGoodAnswer(tone)) {
-//            viewModel.addPoint();
-//            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in);
-//            coin.startAnimation(animation);
-//        } else {
-//            viewModel.saveScore();
-//            mListener.gameOver();
-//        }
     }
     //endregion
 }

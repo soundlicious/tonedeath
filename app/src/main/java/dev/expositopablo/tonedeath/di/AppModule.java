@@ -11,7 +11,7 @@ import dev.expositopablo.tonedeath.ToneDeathApplication;
 
 @Module(subcomponents = ViewModelSubComponent.class)
 public class AppModule {
-    Application application;
+    private Application application;
 
     public AppModule(ToneDeathApplication application) {
         this.application = application;
@@ -19,13 +19,13 @@ public class AppModule {
 
     @Provides
     @Singleton
-    Application providesApplication() {
+    public Application providesApplication() {
         return application;
     }
 
     @Singleton
     @Provides
-    ViewModelProvider.Factory provideViewModelFactory(
+    public ViewModelProvider.Factory provideViewModelFactory(
             ViewModelSubComponent.Builder viewModelSubComponent) {
 
         return new ViewModelFactory(viewModelSubComponent.build());

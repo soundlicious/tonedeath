@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent=".5"
-        android:contentDescription="lil'4 give a choice"
+        android:contentDescription="@string/sakura"
         android:scaleType="centerCrop"
         android:src="@drawable/sakura"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,8 @@
                 android:layout_margin="8dp"
                 android:src="@drawable/learning"
                 app:layout_constraintEnd_toStartOf="@+id/textView_main_card_learning"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/learn" />
 
             <TextView
                 android:id="@+id/textView_main_card_learning"
@@ -54,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
                 android:gravity="center"
-                android:text="Learn"
+                android:text="@string/learn"
                 android:textAllCaps="true"
                 android:textColor="@color/material_color_white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +95,8 @@
                 android:layout_margin="8dp"
                 android:src="@drawable/practice"
                 app:layout_constraintEnd_toStartOf="@+id/textView_main_card_practice"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                android:contentDescription="@string/practice" />
 
             <TextView
                 android:id="@+id/textView_main_card_practice"
@@ -104,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
-                android:text="PRACTICE"
+                android:text="@string/practice"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintWidth_default="percent"
                 app:layout_constraintWidth_percent=".8" />

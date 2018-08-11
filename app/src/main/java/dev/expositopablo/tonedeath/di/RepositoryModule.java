@@ -29,21 +29,21 @@ public class RepositoryModule {
 
     @Singleton
     @Provides
-    PinyinDatabase providesPinyinDatabase() {
+    public PinyinDatabase providesPinyinDatabase() {
         return pinyinDatabase;
     }
 
     @Provides
     @Singleton
-    PinyinDao providePinyinDao(PinyinDatabase database){
-        return database.PinyinDao();
+    public PinyinDao providePinyinDao(PinyinDatabase database){
+        return database.pinyinDao();
     }
 
     @Provides
     @Singleton
-    SharedPreferences provideSharedPrefs(){return sharedPref;}
+    public SharedPreferences provideSharedPrefs(){return sharedPref;}
 
     @Provides
     @Singleton
-    DataManager provideDataManager(){return new AppDataManager(pinyinDatabase, sharedPref);}
+    public DataManager provideDataManager(){return new AppDataManager(pinyinDatabase, sharedPref);}
 }

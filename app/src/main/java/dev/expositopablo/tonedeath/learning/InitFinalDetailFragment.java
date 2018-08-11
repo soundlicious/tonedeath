@@ -29,19 +29,15 @@ public class InitFinalDetailFragment extends Fragment {
 
     public static final String ARG_ISINITIAL_MAIN = "isInitialMain";
     public static final String ARG_ITEM = "init_final_string";
+
     private String mItem;
-    private RecyclerView recyclerView;
     private SimpleItemRecyclerViewAdapter adapter;
     private Callback callback;
-    private InitFinalViewModel viewModel;
 
     public interface Callback {
         void onDetailSelected(Pinyin pinyin);
 
         InitFinalViewModel getViewModel();
-    }
-
-    public InitFinalDetailFragment() {
     }
 
     @Override
@@ -81,13 +77,13 @@ public class InitFinalDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewModel = callback.getViewModel();
+        InitFinalViewModel viewModel = callback.getViewModel();
         View rootView = inflater.inflate(R.layout.initfinal_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        recyclerView = rootView.findViewById(R.id.initfinal_detail_list);
+        RecyclerView recyclerView = rootView.findViewById(R.id.initfinal_detail_list);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), InitFinalListActivity.calculateNoOfColumns(getContext())));
-        adapter = new SimpleItemRecyclerViewAdapter(callback, new ArrayList<>(), !viewModel.isInitialFirst.getValue());
+        adapter = new SimpleItemRecyclerViewAdapter(callback, new ArrayList<>(), !viewModel.isInitialFirst());
         recyclerView.setAdapter(adapter);
 
         viewModel.getDetailList(mItem).observe(this, items -> {
@@ -142,13 +138,13 @@ public class InitFinalDetailFragment extends Fragment {
             return mValues.size();
         }
 
-        public void setItems(ArrayList<Pinyin> items) {
+        private void setItems(ArrayList<Pinyin> items) {
             mValues = items;
             notifyDataSetChanged();
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mContentView;
+            private final TextView mContentView;
 
             ViewHolder(View view) {
                 super(view);

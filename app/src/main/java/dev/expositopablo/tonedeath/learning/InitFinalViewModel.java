@@ -15,8 +15,8 @@ import dev.expositopablo.tonedeath.data.db.DataManager;
 
 public class InitFinalViewModel extends AndroidViewModel {
 
-    DataManager dataManager;
-    MutableLiveData<Boolean> isInitialFirst = new MutableLiveData<>();
+    private final DataManager dataManager;
+    private final MutableLiveData<Boolean> isInitialFirst = new MutableLiveData<>();
     private boolean isTablet = false;
 
     @Inject
@@ -45,5 +45,9 @@ public class InitFinalViewModel extends AndroidViewModel {
     public LiveData<List<String>> switchMainAndDetailList(){
         isInitialFirst.setValue(!isInitialFirst.getValue());
         return dataManager.getMainList(isInitialFirst.getValue());
+    }
+
+    public boolean isInitialFirst(){
+        return isInitialFirst.getValue();
     }
 }

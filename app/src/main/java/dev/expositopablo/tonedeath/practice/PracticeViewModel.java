@@ -5,7 +5,6 @@ import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
@@ -20,11 +19,13 @@ import dev.expositopablo.tonedeath.data.db.DataManager;
 public class PracticeViewModel extends AndroidViewModel {
 
     private final DataManager datamanager;
-    private MutableLiveData<String> tone = new MutableLiveData<>();
-    private MutableLiveData<Integer> score = new MutableLiveData<>();
-    private MutableLiveData<Integer> animOrder = new MutableLiveData<>();
-    private MutableLiveData<Pinyin> pinyin = new MutableLiveData<>();
-    private MutableLiveData<Integer> life = new MutableLiveData<>();
+    private final MutableLiveData<String> tone = new MutableLiveData<>();
+    private final MutableLiveData<Integer> score = new MutableLiveData<>();
+    private final MutableLiveData<Pinyin> pinyin = new MutableLiveData<>();
+    private final MutableLiveData<Integer> life = new MutableLiveData<>();
+    private final MutableLiveData<String> toneAnswer = new MutableLiveData<>();
+    private final MutableLiveData<String> oldTone = new MutableLiveData<>();
+    private final MutableLiveData<Pinyin> oldPinyin = new MutableLiveData<>();
     private PracticeCallback callback;
 
     @Inject
@@ -33,9 +34,7 @@ public class PracticeViewModel extends AndroidViewModel {
         this.datamanager = dataManager;
         tone.setValue(Constants.TONES.get(new Random().nextInt(4)));
         score.setValue(0);
-        animOrder.setValue(-1);
         life.setValue(1);
-
         loadPinyin();
     }
 
@@ -53,6 +52,9 @@ public class PracticeViewModel extends AndroidViewModel {
 
     public void checkAnswer(String answer){
         boolean isGoodAnswer = tone.getValue().equals(answer);
+        toneAnswer.setValue(answer);
+        oldTone.setValue(tone.getValue());
+        oldPinyin.setValue(pinyin.getValue());
         tone.setValue(Constants.TONES.get(new Random().nextInt(4)));
         loadPinyin();
         if (!isGoodAnswer) {
@@ -95,5 +97,21 @@ public class PracticeViewModel extends AndroidViewModel {
 
     public void addLife() {
         life.setValue(1);
+    }
+
+    public LiveData<Integer> getScore() {
+        return score;
+    }
+
+    public MutableLiveData<String> getToneAnswer() {
+        return toneAnswer;
+    }
+
+    public MutableLiveData<String> getOldTone() {
+        return oldTone;
+    }
+
+    public Pinyin getOldPinyin() {
+        return oldPinyin.getValue();
     }
 }

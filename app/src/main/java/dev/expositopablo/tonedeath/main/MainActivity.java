@@ -8,7 +8,6 @@ import android.support.v7.widget.CardView;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
@@ -32,16 +31,16 @@ import io.fabric.sdk.android.Fabric;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Inject
-    DataManager dataManager;
+    protected DataManager dataManager;
 
     @BindView(R.id.textView_main_score)
-    TextView score;
+    protected TextView score;
     @BindView(R.id.adView_main_banner)
-    AdView mAdView;
+    protected AdView mAdView;
     @BindView(R.id.button_main_learning)
-    CardView learningButton;
+    protected CardView learningButton;
     @BindView(R.id.button_main_practice)
-    CardView practiceButton;
+    protected CardView practiceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button_main_practice:
                 startActivity(new Intent(this, PracticeActivity.class));
                 break;
+            default: //Nothing
         }
     }
 }

@@ -24,7 +24,7 @@ import dev.expositopablo.tonedeath.data.commons.Pinyin;
 public class InitFinalDetailActivity extends AppCompatActivity implements InitFinalDetailFragment.Callback {
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    protected ViewModelProvider.Factory viewModelFactory;
     private InitFinalViewModel viewModel;
 
     @Override

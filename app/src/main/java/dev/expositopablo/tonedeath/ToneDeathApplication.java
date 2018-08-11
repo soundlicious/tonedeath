@@ -2,9 +2,6 @@ package dev.expositopablo.tonedeath;
 
 import android.app.Activity;
 import android.app.Application;
-import android.util.Log;
-
-import com.amitshekhar.DebugDB;
 
 import javax.inject.Inject;
 
@@ -17,7 +14,7 @@ import dev.expositopablo.tonedeath.di.RepositoryModule;
 
 public class ToneDeathApplication extends Application implements HasActivityInjector {
     @Inject
-    DispatchingAndroidInjector<Activity> activityInjector;
+    protected DispatchingAndroidInjector<Activity> activityInjector;
 
     @Override
     public void onCreate() {
@@ -28,10 +25,6 @@ public class ToneDeathApplication extends Application implements HasActivityInje
                 .repositoryModule(new RepositoryModule(this))
                 .build()
                 .inject(this);
-
-        if (BuildConfig.DEBUG){
-            Log.i("TONEDEATHAPP", DebugDB.getAddressLog());
-        }
     }
 
     @Override

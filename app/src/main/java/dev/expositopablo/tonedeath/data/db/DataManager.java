@@ -1,7 +1,6 @@
 package dev.expositopablo.tonedeath.data.db;
 
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import java.util.List;

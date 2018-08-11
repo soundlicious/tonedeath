@@ -5,42 +5,148 @@
     android:id="@+id/constraitLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".practice.GameOver">
+    tools:context=".practice.PracticeActivity">
 
+
+    <TextView
+        android:id="@+id/textView_practice_final_score"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_practice_go_coin"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_practice_go_coin"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="@+id/imageView_practice_go_coin"
+        app:layout_constraintTop_toTopOf="@+id/imageView_practice_go_coin"
+        tools:text="13" />
 
     <ImageView
-        android:id="@+id/imageView_practice_gameOver_paifang"
+        android:id="@+id/imageView_practice_go_coin"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".1"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".1"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/coin"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_practice_fanwujiu"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_practice_fanwujiu"
+        app:layout_constraintStart_toEndOf="@+id/imageView_practice_xiebian"
+        app:srcCompat="@drawable/ic_coin" />
+
+    <ImageView
+        android:id="@+id/imageView_practice_xiebian"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".2"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".3"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="@string/GameOver"
-        android:src="@drawable/ic_paifang"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/xiebian"
+        android:contentDescription="@string/xiebian" />
 
     <ImageView
-        android:id="@+id/imageView_practice_gameOver_xiebian2"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:contentDescription="@string/GameOver"
-        android:src="@drawable/xiebian"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:id="@+id/imageView_practice_fanwujiu"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".2"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".3"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fanwujiu"
+        android:contentDescription="@string/fanwujiu" />
 
-    <ImageView
-        android:id="@+id/imageView_practice_gameOver_fanwujiu"
-        android:layout_width="150dp"
-        android:layout_height="200dp"
+    <ImageButton
+        android:id="@+id/imageButton_practice_bad"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="@string/GameOver"
-        android:src="@drawable/fanwujiu"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/material_color_red_700"
+        android:contentDescription="@string/badanwser"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_practice_good"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".45"
+        app:srcCompat="@drawable/tone_1" />
+
+    <ImageButton
+        android:id="@+id/imageButton_practice_good"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".3"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".45"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/material_color_green_700"
+        android:contentDescription="@string/goodanswer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/tone_1" />
+
+    <TextView
+        android:id="@+id/textView_practice_gotext"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_practice_go_croner_bottom"
+        app:layout_constraintEnd_toEndOf="@+id/imageView_practice_go_croner_bottom"
+        app:layout_constraintStart_toStartOf="@+id/imageView_practice_go_corner_top"
+        app:layout_constraintTop_toTopOf="@+id/imageView_practice_go_corner_top"
+        android:text="@string/game_over_text" />
+
+    <ImageView
+        android:id="@+id/imageView_practice_go_corner_top"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".1"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".1"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_xiebian"
+        app:srcCompat="@drawable/ic_corner_top_left"
+        android:contentDescription="@string/corner" />
+
+    <ImageView
+        android:id="@+id/imageView_practice_go_croner_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/corner"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton_practice_bad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".1"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".1"
+        app:srcCompat="@drawable/ic_corner_bottom_right" />
 
 </android.support.constraint.ConstraintLayout>

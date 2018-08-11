@@ -11,7 +11,7 @@
         android:id="@+id/imageView_main_lil4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="lil'4 give a choice"
+        android:contentDescription="@string/sakura"
         android:scaleType="centerCrop"
         android:src="@drawable/sakura"
         app:layout_constraintBottom_toTopOf="@+id/button_main_learning"
@@ -54,7 +54,8 @@
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".7"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/learn" />
 
             <TextView
                 android:id="@+id/textView_main_card_learning"
@@ -65,7 +66,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="Learn"
+                android:text="@string/learn"
                 android:textAllCaps="true"
                 android:textColor="@color/material_color_white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -113,7 +114,8 @@
                 app:layout_constraintHeight_default="percent"
                 app:layout_constraintHeight_percent=".7"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/practice" />
 
             <TextView
                 android:id="@+id/textView_main_card_practice"
@@ -124,7 +126,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="PRACTICE"
+                android:text="@string/practice"
                 android:textAllCaps="true"
                 android:textColor="@color/material_color_white"
                 app:layout_constraintBottom_toBottomOf="parent"

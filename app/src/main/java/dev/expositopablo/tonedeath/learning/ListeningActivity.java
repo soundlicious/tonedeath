@@ -11,8 +11,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.google.android.gms.common.images.internal.ImageUtils;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -28,20 +26,20 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     public static final String PINYIN = "listeningActivity.pinyin";
 
     @BindView(R.id.textView_listening_pinyin)
-    TextView pinyin;
+    protected TextView pinyin;
     @BindView(R.id.button_listening_tone1)
-    ImageButton tone1;
+    protected ImageButton tone1;
     @BindView(R.id.button_listening_tone2)
-    ImageButton tone2;
+    protected ImageButton tone2;
     @BindView(R.id.button_listening_tone3)
-    ImageButton tone3;
+    protected ImageButton tone3;
     @BindView(R.id.button_listening_tone4)
-    ImageButton tone4;
+    protected ImageButton tone4;
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    protected ViewModelProvider.Factory viewModelFactory;
 
-    private ListeningViewModel viewodel;
     private MediaPlayer mediaPlayer;
+    private ListeningViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,15 +51,21 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
 
         Pinyin pinyin = getIntent().getParcelableExtra(PINYIN);
 
-        viewodel = ViewModelProviders.of(this, viewModelFactory).get(ListeningViewModel.class);
-        viewodel.setPinyin(pinyin);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListeningViewModel.class);
 
-        this.pinyin.setText(pinyin.toString());
+        if (pinyin != null)
+            viewModel.setPinyin(pinyin);
 
         tone1.setOnClickListener(this);
         tone2.setOnClickListener(this);
         tone3.setOnClickListener(this);
         tone4.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.getPinyin().observe(this, value -> pinyin.setText(value.toString()));
     }
 
     @Override
@@ -80,6 +84,7 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
             case R.id.button_listening_tone4:
                 tone = Constants.TONES.get(3);
                 break;
+            default: //Nothing
         }
         String fileName = tone;
         int resID = getResources().getIdentifier(fileName, "raw", getPackageName());
@@ -103,9 +108,9 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
 
     private void setImageButtonState(ImageButton tone, boolean isEnable, Drawable drawable) {
         tone.setEnabled(isEnable);
-        if (isEnable){
+        if (isEnable) {
             tone.setImageDrawable(drawable);
-        }else {
+        } else {
             tone.setImageDrawable(ImagesUtils.convertDrawableToGrayScale(drawable));
         }
     }

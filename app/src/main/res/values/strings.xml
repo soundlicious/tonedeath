@@ -14,4 +14,20 @@
     <string name="nothx">No thanks</string>
     <string name="confirmWatchAd">Watch it</string>
     <string name="current_score">Score :</string>
+    <string name="tone1">first tone</string>
+    <string name="tone2">second tone</string>
+    <string name="tone3">third tone</string>
+    <string name="tone4">fourth tone</string>
+    <string name="content_desc_window">chinese window</string>
+    <string name="corner">corner</string>
+    <string name="play">play</string>
+    <string name="coin">coin</string>
+    <string name="learn">learn</string>
+    <string name="practice">practice</string>
+    <string name="sakura">Cherry three</string>
+    <string name="xiebian">xiebian</string>
+    <string name="fanwujiu">fan wujiu</string>
+    <string name="badanwser">bad answer</string>
+    <string name="goodanswer">good answer</string>
+    <string name="game_over_text">Listen to the difference between those tones</string>
 </resources>

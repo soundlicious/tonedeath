@@ -12,13 +12,13 @@ import dev.expositopablo.tonedeath.practice.PracticeActivity;
 public abstract class BuildersModule {
 
     @ContributesAndroidInjector
-    abstract MainActivity contributeMainActivity();
+    public abstract MainActivity contributeMainActivity();
     @ContributesAndroidInjector
-    abstract InitFinalListActivity contributeInitFinalListActivity();
+    public abstract InitFinalListActivity contributeInitFinalListActivity();
     @ContributesAndroidInjector
-    abstract InitFinalDetailActivity contributeInitFinalDetailActivity();
+    public abstract InitFinalDetailActivity contributeInitFinalDetailActivity();
     @ContributesAndroidInjector
-    abstract PracticeActivity contributePracticeActivity();
+    public abstract PracticeActivity contributePracticeActivity();
     @ContributesAndroidInjector
-    abstract ListeningActivity contributeListeningActivity();
+    public abstract ListeningActivity contributeListeningActivity();
 }

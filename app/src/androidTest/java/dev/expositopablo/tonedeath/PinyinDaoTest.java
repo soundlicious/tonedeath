@@ -37,11 +37,11 @@ public class PinyinDaoTest {
         db = Room.inMemoryDatabaseBuilder(context, PinyinDatabase.class)
                 .allowMainThreadQueries()
                 .build();
-        pinyinDao = db.PinyinDao();
+        pinyinDao = db.pinyinDao();
     }
 
     @After
-    public void closeDb() throws IOException {
+    public void closeDb() {
         db.clearAllTables();
         db.close();
     }

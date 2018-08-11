@@ -7,11 +7,9 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -35,10 +33,10 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
     private static final String PRACTICE = "PracticeFragment";
 
     @Inject
-    ViewModelProvider.Factory viewModelFactory;
+    protected ViewModelProvider.Factory viewModelFactory;
 
     @BindView(R.id.frameLayout_practice)
-    FrameLayout frameLayout;
+    protected FrameLayout frameLayout;
 
     private RewardedVideoAd mRewardedVideoAd;
     private PracticeViewModel viewModel;
@@ -50,7 +48,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
-        Log.i("dev.practice", "Activity : onCreate");
 
         ButterKnife.bind(this);
 
@@ -75,8 +72,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     @Override
     public void onResume() {
-        Log.i("dev.practice", "Activity : onResume");
-
         if (mRewardedVideoAd != null)
             mRewardedVideoAd.resume(this);
         super.onResume();
@@ -84,7 +79,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     @Override
     public void onPause() {
-        Log.i("dev.practice", "Activity : onPause");
         if (mRewardedVideoAd != null)
             mRewardedVideoAd.pause(this);
         super.onPause();
@@ -92,7 +86,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     @Override
     public void onDestroy() {
-        Log.i("dev.practice", "Activity : onDestroy");
         if (mRewardedVideoAd != null)
             mRewardedVideoAd.destroy(this);
         super.onDestroy();
@@ -164,47 +157,36 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     @Override
     public void onRewardedVideoAdLoaded() {
-        Log.i("dev.practice", "Activity : AdLoaded");
     }
 
     @Override
     public void onRewardedVideoAdOpened() {
-        Log.i("dev.practice", "Activity : AdOpem");
-
     }
 
     @Override
     public void onRewardedVideoStarted() {
-        Log.i("dev.practice", "Activity : AdStarted");
-
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
-        Log.i("dev.practice", "Activity : AdClosed");
         loadRewardedVideoAd();
     }
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Log.i("dev.practice", "Activity : AdRewarded");
         viewModel.addLife();
     }
 
     @Override
     public void onRewardedVideoAdLeftApplication() {
-        Log.i("dev.practice", "Activity : AdLeftApp");
     }
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
-        Log.i("dev.practice", "Activity : adFailedToLaod");
-
     }
 
     @Override
     public void onRewardedVideoCompleted() {
-        Log.i("dev.practice", "Activity : AdVideoCompleted");
     }
     //endregion
 }

@@ -17,9 +17,9 @@ import dev.expositopablo.tonedeath.data.db.dao.PinyinDao;
 @Database(entities = {Pinyin.class}, version = 1)
 public abstract class PinyinDatabase extends RoomDatabase{
 
-    public abstract PinyinDao PinyinDao();
-
     private static PinyinDatabase INSTANCE;
+
+    public abstract PinyinDao pinyinDao();
 
     public static PinyinDatabase getDatabase(final Context context){
         if (INSTANCE == null){
@@ -52,7 +52,7 @@ public abstract class PinyinDatabase extends RoomDatabase{
         private final PinyinDao pinyinDao;
 
         PopulateDBAsync(PinyinDatabase db) {
-            this.pinyinDao = db.PinyinDao();
+            this.pinyinDao = db.pinyinDao();
         }
 
         @Override

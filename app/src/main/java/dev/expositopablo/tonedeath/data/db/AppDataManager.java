@@ -20,7 +20,7 @@ public class AppDataManager implements DataManager {
 
     @Inject
     public AppDataManager(PinyinDatabase db, SharedPreferences pref) {
-        pinyinDao = db.PinyinDao();
+        pinyinDao = db.pinyinDao();
         this.pref = pref;
     }
 

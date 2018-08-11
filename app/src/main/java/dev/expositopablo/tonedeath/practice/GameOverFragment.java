@@ -1,40 +1,45 @@
 package dev.expositopablo.tonedeath.practice;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.expositopablo.tonedeath.R;
-import dev.expositopablo.tonedeath.uselesswidget.UselessWidget;
+import dev.expositopablo.tonedeath.data.commons.Pinyin;
 
 public class GameOverFragment extends Fragment {
 
     private PracticeCallback mListener;
 
-    @BindView(R.id.imageView_practice_gameOver_fanwujiu)
-    ImageView fanwujiu;
-    @BindView(R.id.imageView_practice_gameOver_xiebian2)
-    ImageView xiebian;
+    @BindView(R.id.imageView_practice_fanwujiu)
+    protected ImageView fanwujiu;
+    @BindView(R.id.imageView_practice_xiebian)
+    protected ImageView xiebian;
+    @BindView(R.id.imageButton_practice_bad)
+    protected ImageButton bad;
+    @BindView(R.id.imageButton_practice_good)
+    protected ImageButton good;
+    @BindView(R.id.textView_practice_final_score)
+    protected TextView finalScore;
+    private MediaPlayer mediaPlayer;
 
-    public GameOverFragment() {
-        // Required empty public constructor
-    }
 
     //region Lyfecycle
     @Override
@@ -48,64 +53,90 @@ public class GameOverFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_game_over, container, false);
         ButterKnife.bind(this, view);
-        Log.i("dev.practice", "FragmentGO : onCreateView");
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        startAnimation();
         createDialog();
+        getScore();
+    }
+
+    private void getScore() {
+        mListener.getViewModel().getScore().observe(getActivity(), value -> {
+            finalScore.setText(value.toString());
+        });
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.i("dev.practice", "FragmentGO : onVieaCreated");
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.i("dev.practice", "FragmentGO : onAttach");
 
         if (context instanceof PracticeCallback) {
             mListener = (PracticeCallback) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement PracticeCallback");
         }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.i("dev.practice", "FragmentGO : onDetach");
-
         mListener = null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.i("dev.practice", "FragmentGO : onPause");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getLife();
-        Log.i("dev.practice", "FragmentGO : onResume");
+        setButton();
+    }
+
+    private void setButton() {
+        mListener.getViewModel().getOldTone().observe(getActivity(), value -> {
+            setImage(good, value);
+        });
+        mListener.getViewModel().getToneAnswer().observe(getActivity(), value -> {
+            setImage(bad, value);
+
+        });
+    }
+
+    private void setImage(ImageButton button, String value) {
+        Context context = getActivity();
+        if (context != null) {
+            int resID = getResources().getIdentifier(value, "drawable", context.getPackageName());
+            button.setImageResource(resID);
+            button.setOnClickListener(view -> playSound(value));
+
+        }
+    }
+
+    private void playSound(String value) {
+        Pinyin pinyin = mListener.getViewModel().getOldPinyin();
+        if (mediaPlayer != null)
+            mediaPlayer.release();
+        int resID = getResources().getIdentifier(value, "raw", getActivity().getPackageName());
+        mediaPlayer = MediaPlayer.create(getContext(), resID);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.start();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("dev.practice", "FragmentGO : onDestroy");
-
     }
     //endregion
 
@@ -114,22 +145,31 @@ public class GameOverFragment extends Fragment {
         mListener.getViewModel().getLife().observe(getActivity(), value -> {
             if (value == 1)
                 mListener.backToGame();
+            else {
+                startAnimation();
+            }
         });
     }
     //endregion
 
     //region Animations
     private void startAnimation() {
-        Animation leviosa = AnimationUtils.loadAnimation(getActivity(), R.anim.levitate_up);
-        leviosa.setRepeatCount(Animation.INFINITE);
+        Context context = getActivity();
+        if (context != null) {
+            Animation leviosa = AnimationUtils.loadAnimation(context, R.anim.levitate_up);
+            leviosa.setRepeatCount(Animation.INFINITE);
 
-        fanwujiu.startAnimation(leviosa);
-        xiebian.startAnimation(leviosa);
+            fanwujiu.startAnimation(leviosa);
+            xiebian.startAnimation(leviosa);
+            Animation goUp = AnimationUtils.loadAnimation(context, R.anim.go_up);
+            goUp.setFillAfter(true);
+            finalScore.startAnimation(goUp);
+        }
     }
     //endregion
 
     //region Dialogs
-    private void createDialog(){
+    private void createDialog() {
         if (mListener.isAdLoaded()) {
             SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.CUSTOM_IMAGE_TYPE)
                     .setCustomImage(R.drawable.phoenix)

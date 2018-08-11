@@ -141,6 +141,7 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
         private final ArrayList<Integer> colorsList;
         private List<String> mValues;
         private final boolean mTwoPane;
+
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,11 +158,12 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
                     Context context = view.getContext();
                     Intent intent = new Intent(context, InitFinalDetailActivity.class);
                     intent.putExtra(InitFinalDetailFragment.ARG_ITEM, item);
-                    intent.putExtra(InitFinalDetailFragment.ARG_ISINITIAL_MAIN, mParentActivity.viewModel.isInitialFirst.getValue());
+                    intent.putExtra(InitFinalDetailFragment.ARG_ISINITIAL_MAIN, mParentActivity.viewModel.isInitialFirst());
                     context.startActivity(intent);
                 }
             }
         };
+
 
         SimpleItemRecyclerViewAdapter(InitFinalListActivity parent,
                                       List<String> items,
@@ -202,6 +204,7 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_200));
         }
 
+        @NonNull
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -223,14 +226,14 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
             return mValues.size();
         }
 
-        public void setItems(ArrayList<String> items) {
+        private void setItems(ArrayList<String> items) {
             mValues = items;
             notifyDataSetChanged();
 
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            final TextView mContentView;
+            private final TextView mContentView;
 
             ViewHolder(View view) {
                 super(view);

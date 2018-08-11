@@ -13,7 +13,6 @@
         android:layout_margin="8dp"
         android:backgroundTint="@color/material_color_red_700"
         android:src="@drawable/tone_1"
-        android:text="Button"
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toTopOf="@+id/button_listening_tone3"
         app:layout_constraintHeight_default="percent"
@@ -21,7 +20,8 @@
         app:layout_constraintStart_toEndOf="@+id/imageView_listening_window"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".2" />
+        app:layout_constraintWidth_percent=".2"
+        android:contentDescription="@string/tone1" />
 
     <ImageButton
         android:id="@+id/button_listening_tone2"
@@ -30,7 +30,6 @@
         android:layout_margin="8dp"
         android:backgroundTint="@color/material_color_pink_700"
         android:src="@drawable/tone_2"
-        android:text="Button"
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toTopOf="@+id/button_listening_tone4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +38,8 @@
         app:layout_constraintStart_toEndOf="@+id/button_listening_tone1"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".2" />
+        app:layout_constraintWidth_percent=".2"
+        android:contentDescription="@string/tone2" />
 
     <ImageButton
         android:id="@+id/button_listening_tone3"
@@ -49,7 +49,6 @@
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/material_color_purple_700"
         android:src="@drawable/tone_3"
-        android:text="Button"
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_default="percent"
@@ -57,7 +56,8 @@
         app:layout_constraintStart_toEndOf="@+id/imageView_listening_window"
         app:layout_constraintTop_toBottomOf="@+id/button_listening_tone1"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".2" />
+        app:layout_constraintWidth_percent=".2"
+        android:contentDescription="@string/tone3" />
 
     <ImageButton
         android:id="@+id/button_listening_tone4"
@@ -66,7 +66,6 @@
         android:layout_margin="8dp"
         android:backgroundTint="@color/material_color_deep_purple_700"
         android:src="@drawable/tone_4"
-        android:text="Button"
         app:layout_constrainedHeight="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +75,8 @@
         app:layout_constraintStart_toEndOf="@+id/button_listening_tone3"
         app:layout_constraintTop_toBottomOf="@+id/button_listening_tone2"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".2" />
+        app:layout_constraintWidth_percent=".2"
+        android:contentDescription="@string/tone4" />
 
     <ImageView
         android:id="@+id/imageView_listening_window"
@@ -90,7 +90,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent=".5"
-        app:layout_constraintWidth_default="percent" />
+        app:layout_constraintWidth_default="percent"
+        android:contentDescription="@string/content_desc_window" />
 
     <TextView
         android:id="@+id/textView_listening_pinyin"
@@ -109,7 +110,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView_listening_window"
         app:layout_constraintWidth_default="percent"
-        app:layout_constraintWidth_percent=".3" />
+        app:layout_constraintWidth_percent=".3"
+        tools:ignore="MissingPrefix" />
 
 
 </android.support.constraint.ConstraintLayout>
