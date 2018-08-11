@@ -1,16 +1,23 @@
 package dev.expositopablo.tonedeath.learning;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import dev.expositopablo.tonedeath.R;
-import dev.expositopablo.tonedeath.learning.dummy.DummyContent;
+import dev.expositopablo.tonedeath.data.commons.Pinyin;
 
 /**
  * A fragment representing a single InitFinal detail screen.
@@ -19,38 +26,54 @@ import dev.expositopablo.tonedeath.learning.dummy.DummyContent;
  * on handsets.
  */
 public class InitFinalDetailFragment extends Fragment {
-    /**
-     * The fragment argument representing the item ID that this fragment
-     * represents.
-     */
-    public static final String ARG_ITEM_ID = "item_id";
 
-    /**
-     * The dummy content this fragment is presenting.
-     */
-    private DummyContent.DummyItem mItem;
+    public static final String ARG_ISINITIAL_MAIN = "isInitialMain";
+    public static final String ARG_ITEM = "init_final_string";
+    private String mItem;
+    private RecyclerView recyclerView;
+    private SimpleItemRecyclerViewAdapter adapter;
+    private Callback callback;
+    private InitFinalViewModel viewModel;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    public interface Callback {
+        void onDetailSelected(Pinyin pinyin);
+
+        InitFinalViewModel getViewModel();
+    }
+
     public InitFinalDetailFragment() {
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            callback = (Callback) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException("Parent Activity must implement Callback");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(ARG_ITEM)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
+            mItem = args.getString(ARG_ITEM);
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle(mItem.toUpperCase());
             }
         }
     }
@@ -58,13 +81,79 @@ public class InitFinalDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        viewModel = callback.getViewModel();
         View rootView = inflater.inflate(R.layout.initfinal_detail, container, false);
 
         // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.initfinal_detail)).setText(mItem.details);
+        recyclerView = rootView.findViewById(R.id.initfinal_detail_list);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), InitFinalListActivity.calculateNoOfColumns(getContext())));
+        adapter = new SimpleItemRecyclerViewAdapter(callback, new ArrayList<>(), !viewModel.isInitialFirst.getValue());
+        recyclerView.setAdapter(adapter);
+
+        viewModel.getDetailList(mItem).observe(this, items -> {
+            if (items != null)
+                adapter.setItems(new ArrayList<>(items));
+        });
+        return rootView;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    public static class SimpleItemRecyclerViewAdapter
+            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
+
+        private final Callback callback;
+        private final boolean displayInitial;
+        private List<Pinyin> mValues;
+        private final View.OnClickListener mOnClickListener;
+
+        SimpleItemRecyclerViewAdapter(Callback callback,
+                                      List<Pinyin> items,
+                                      boolean displayInitial) {
+            mValues = items;
+            this.displayInitial =  displayInitial;
+            this.callback = callback;
+            mOnClickListener = view -> {
+                String item = (String) view.getTag();
+                if (this.callback != null)
+                    this.callback.onDetailSelected(mValues.get(Integer.parseInt(item)));
+            };
         }
 
-        return rootView;
+        @Override
+        public SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.initfinal_list_content, parent, false);
+            return new SimpleItemRecyclerViewAdapter.ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(final SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
+            holder.mContentView.setText(displayInitial?mValues.get(position).getInitial():mValues.get(position).getFinal());
+            holder.itemView.setTag("" + position);
+            holder.itemView.setOnClickListener(mOnClickListener);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mValues.size();
+        }
+
+        public void setItems(ArrayList<Pinyin> items) {
+            mValues = items;
+            notifyDataSetChanged();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            final TextView mContentView;
+
+            ViewHolder(View view) {
+                super(view);
+                mContentView = view.findViewById(R.id.content);
+            }
+        }
     }
 }

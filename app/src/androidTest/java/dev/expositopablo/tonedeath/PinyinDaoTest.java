@@ -185,6 +185,7 @@ public class PinyinDaoTest {
 
         List<Pinyin> allPinyin = LiveDataTestUtil.getValue(pinyinDao.getAllPinyinByFinal("zh"));
         assertEquals(allPinyin.get(0), pinyins.get(pinyins.size() - 1));
+        assertTrue( allPinyin.size() == 1);
     }
 
     @Test

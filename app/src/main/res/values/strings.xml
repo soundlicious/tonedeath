@@ -2,6 +2,16 @@
     <string name="app_name">ToneDeath</string>
     <string name="title_initfinal_list">InitFinals</string>
     <string name="title_initfinal_detail">InitFinal Detail</string>
-    <string name="appwidget_text">Hey i\'m a useless (mandatory) widget!</string>
+    <string name="appwidget_text">Best Score : 0</string>
     <string name="add_widget">Add widget</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="GameOver">GameOver</string>
+    <string name="display_score">Best score : </string>
+    <string name="getExtraLife">Watch a video ad and get an extra life</string>
+    <string name="continuePlay">Would you like to continue?</string>
+    <string name="nothx">No thanks</string>
+    <string name="confirmWatchAd">Watch it</string>
+    <string name="current_score">Score :</string>
 </resources>

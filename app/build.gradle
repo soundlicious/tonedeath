@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -13,9 +14,19 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
+            resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppTokenTest}"
+            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppTokenTest}"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
+            resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppToken}"
+            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppToken}"
         }
     }
     compileOptions {
@@ -29,6 +40,7 @@ dependencies {
 
     //region SupportLib
     implementation "com.android.support:support-v4:$supportLib"
+    implementation "com.android.support:customtabs:$supportLib"
     implementation "com.android.support:support-v13:$supportLib"
     implementation "com.android.support:appcompat-v7:$supportLib"
     implementation "com.android.support:palette-v7:$supportLib"
@@ -36,15 +48,17 @@ dependencies {
     implementation "com.android.support:cardview-v7:$supportLib"
     implementation "com.android.support:design:$supportLib"
     implementation "com.android.support.constraint:constraint-layout:$constraintLib"
-    implementation "blue.aodev:material-values:$materialValues"
+    //endregion
 
+    //region UI
+    implementation "blue.aodev:material-values:$materialValues"
+    implementation "com.jakewharton:butterknife:$butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
+    implementation "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"
     //endregion
 
     //region ArchComponent
     implementation "android.arch.persistence.room:runtime:$roomVersion"
-    implementation 'com.android.support:support-v4:28.0.0-alpha3'
-    implementation 'com.android.support:recyclerview-v7:28.0.0-alpha3'
-    implementation 'com.android.support:design:28.0.0-alpha3'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
@@ -56,17 +70,28 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger"
     implementation "com.google.dagger:dagger-android-support:$dagger"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+    //endregion
 
+    //region GoogleServices
+    implementation "com.google.firebase:firebase-core:$firebase"
+    implementation "com.google.android.gms:play-services-ads:$playService"
     //endregion
 
     //region Testing && Debug
     implementation "com.jakewharton.timber:timber:$timber"
     testImplementation "junit:junit:$junit"
     androidTestImplementation "com.android.support.test:runner:$runner"
-    androidTestImplementation ("com.android.support.test.espresso:espresso-core:$espresso", {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
+    debugImplementation "com.amitshekhar.android:debug-db:$debugDB"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
+    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics"){
+        transitive = true;
+    }
     //endregion
 }
+
+apply plugin: 'com.google.gms.google-services'

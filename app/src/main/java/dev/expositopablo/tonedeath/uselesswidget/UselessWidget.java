@@ -3,9 +3,20 @@ package dev.expositopablo.tonedeath.uselesswidget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.provider.ContactsContract;
 import android.widget.RemoteViews;
 
+import javax.inject.Inject;
+
 import dev.expositopablo.tonedeath.R;
+import dev.expositopablo.tonedeath.data.commons.Constants;
+import dev.expositopablo.tonedeath.data.db.AppDataManager;
+import dev.expositopablo.tonedeath.data.db.DataManager;
+import dev.expositopablo.tonedeath.data.db.PinyinDatabase;
+import dev.expositopablo.tonedeath.data.db.dao.PinyinDao;
+import dev.expositopablo.tonedeath.di.DaggerAppComponent;
 
 /**
  * Implementation of App Widget functionality.
@@ -15,8 +26,9 @@ public class UselessWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
-        // Construct the RemoteViews object
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+
+        CharSequence widgetText = "Best Score : " + pref.getInt(Constants.SCORE, 0);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.useless_widget);
         views.setTextViewText(R.id.appwidget_text, widgetText);
 

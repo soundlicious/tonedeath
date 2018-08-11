@@ -3,10 +3,12 @@ package dev.expositopablo.tonedeath.data.commons;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "pinyin_table")
-public class Pinyin {
+public class Pinyin implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     public Long ID = null;
@@ -50,4 +52,34 @@ public class Pinyin {
     public String getFinal() {
         return Final;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.ID);
+        dest.writeString(this.Initial);
+        dest.writeString(this.Final);
+    }
+
+    protected Pinyin(Parcel in) {
+        this.ID = (Long) in.readValue(Long.class.getClassLoader());
+        this.Initial = in.readString();
+        this.Final = in.readString();
+    }
+
+    public static final Parcelable.Creator<Pinyin> CREATOR = new Parcelable.Creator<Pinyin>() {
+        @Override
+        public Pinyin createFromParcel(Parcel source) {
+            return new Pinyin(source);
+        }
+
+        @Override
+        public Pinyin[] newArray(int size) {
+            return new Pinyin[size];
+        }
+    };
 }

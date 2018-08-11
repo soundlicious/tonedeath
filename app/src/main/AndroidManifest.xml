@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="dev.expositopablo.tonedeath">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".ToneDeathApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/MintTheme"
+        tools:replace="android:icon">
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,11 +21,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="22e426012c79b3e4b015840374519b2dc8c37ec7"
+            />
+        <activity android:name=".practice.PracticeActivity"
+            android:parentActivityName=".main.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
+        </activity>
         <activity
             android:name=".learning.InitFinalListActivity"
             android:label="@string/title_initfinal_list"
             android:parentActivityName=".main.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MintTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.expositopablo.tonedeath.main.MainActivity" />
@@ -29,12 +45,12 @@
             android:name=".learning.InitFinalDetailActivity"
             android:label="@string/title_initfinal_detail"
             android:parentActivityName=".learning.InitFinalListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/MintTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
         </activity>
-        <activity android:name=".learning.ListeningActivity" />
+        <activity android:name=".learning.ListeningActivity"/>
 
         <receiver android:name=".uselesswidget.UselessWidget">
             <intent-filter>
@@ -45,8 +61,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/useless_widget_info" />
         </receiver>
-
-        <activity android:name=".practice.PracticeActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package dev.expositopablo.tonedeath.data.db.dao;
 
 import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
@@ -28,6 +29,9 @@ public interface PinyinDao {
 
     @Query("SELECT * from pinyin_table WHERE final = :pFinal ORDER BY final")
     LiveData<List<Pinyin>> getAllPinyinByFinal(@NonNull String pFinal);
+
+    @Query("SELECT * from pinyin_table WHERE id = abs(random()) % (SELECT max(id) FROM pinyin_table) + 1")
+    Pinyin getRandomPinyin();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pinyin pinyin);

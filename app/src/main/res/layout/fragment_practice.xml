@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".practice.PracticeActivity">
+
+    <ImageView
+        android:id="@+id/imageView_practice_corner_left"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_corner_top_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_practice_corner_right"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_corner_bottom_right"
+        app:layout_constraintBottom_toTopOf="@+id/button_practice_tone2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageButton
+        android:id="@+id/button_practice_tone1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/material_color_red_700"
+        android:src="@drawable/tone_1"
+        app:layout_constraintBottom_toTopOf="@+id/button_practice_tone3"
+        app:layout_constraintEnd_toStartOf="@+id/button_practice_tone2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play" />
+
+    <ImageButton
+        android:id="@+id/button_practice_tone2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/material_color_pink_700"
+        android:src="@drawable/tone_2"
+        app:layout_constraintBottom_toTopOf="@+id/button_practice_tone4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_practice_tone1"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_practice_play" />
+
+    <ImageButton
+        android:id="@+id/button_practice_tone3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/material_color_purple_700"
+        android:src="@drawable/tone_3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_practice_tone4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone1" />
+
+    <ImageButton
+        android:id="@+id/button_practice_tone4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/material_color_deep_purple_700"
+        android:src="@drawable/tone_4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button_practice_tone3"
+        app:layout_constraintTop_toBottomOf="@+id/button_practice_tone2" />
+
+    <ImageView
+        android:id="@+id/imageView_practice_play"
+        android:layout_width="0dp"
+        android:layout_height="280dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView_practice_coin"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_coin"
+        app:layout_constraintEnd_toStartOf="@+id/textView_practice_score"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_practice_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_practice_coin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView_practice_coin" />
+
+
+
+</android.support.constraint.ConstraintLayout>
