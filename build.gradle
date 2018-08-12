@@ -20,6 +20,13 @@ buildscript {
     }
 }
 
+ext.valueDir = { valueDir ->
+    return "app\\src\\main\\res\\" + valueDir + "\\strings.xml"
+}
+
+Properties configProperties = new Properties()
+configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
+
 allprojects {
     repositories {
         mavenLocal()
@@ -33,11 +40,12 @@ allprojects {
 
 ext {
     //region AppVersion
-    adMobAppToken = properties['release_adMob']
-    adMobRecompenseAppToken = properties['release_adMobRecompense']
-    adMobBannerAppToken = properties['release_adMobBanner']
+    adMobAppToken = configProperties['release_adMob']
+    adMobRecompenseAppToken = configProperties['release_adMobRecompense']
+    adMobBannerAppToken = configProperties['release_adMobBanner']
     adMobRecompenseAppTokenTest = "ca-app-pub-3940256099942544/5224354917"
     adMobBannerAppTokenTest = "ca-app-pub-3940256099942544/6300978111"
+    fabricApiKey = configProperties['release_fabricApiKey']
 
     versionMajor = 0
     versionMinor = 1

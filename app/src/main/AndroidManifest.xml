@@ -22,8 +22,8 @@
         </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="22e426012c79b3e4b015840374519b2dc8c37ec7"
-            />
+            android:value="@string/FABRICAPIKEY" />
+
         <activity android:name=".practice.PracticeActivity"
             android:parentActivityName=".main.MainActivity">
 

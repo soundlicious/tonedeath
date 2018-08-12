@@ -16,14 +16,15 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "FABRICAPIKEY", "${rootProject.fabricApiKey}"
             resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
             resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppTokenTest}"
             resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppTokenTest}"
         }
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "FABRICAPIKEY", "${rootProject.fabricApiKey}"
             resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
             resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppToken}"
             resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppToken}"
