@@ -30,7 +30,7 @@ release_fabricApiKey=FabricApiKey
 
 Main Menu            |  Learning : Main List |  Learning : Detail List
 :-------------------------:|:-------------------------:|:-------------------------:
-![](readme-res/MainMenu-Mobile.png)  |  ![](readme-res/learning-MainList-Mobile.png) |  ![](readme-res/Learning_DetailList-Mobile.png)
+![](readme-res/MainMenu-Mobile.png)  |  ![](readme-res/Learning-MainList-Mobile.png) |  ![](readme-res/Learning_DetailList-Mobile.png)
 
 Learning : Listening             |  Practice |  Game Over
 :-------------------------:|:-------------------------:|:-------------------------:
