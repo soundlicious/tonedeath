@@ -5,7 +5,7 @@
 *[From Fan Wujiu & Xie Bian](https://en.wikipedia.org/wiki/Heibai_Wuchang)*
 
 
-** Use the help of Fan Wujiu and Xie Bian to master your listening of Chinese Mandarin tones and try to reach your best score during a practice session. **
+**Use the help of Fan Wujiu and Xie Bian to master your listening of Chinese Mandarin tones and try to reach your best score during a practice session.**
 
 ## Compatibilities
 
@@ -14,7 +14,7 @@
 
 ## How to build
 
-* Edit ** config-template.properties ** at the root of the project with you own [AdMob](https://firebase.google.com/docs/admob/android/quick-start) and [Craslytics](https://firebase.google.com/docs/crashlytics/get-started) credentials.
+* Edit **config-template.properties** at the root of the project with you own [AdMob](https://firebase.google.com/docs/admob/android/quick-start) and [Craslytics](https://firebase.google.com/docs/crashlytics/get-started) credentials.
 
 ```
 release_adMob=ca-app-pub-AdMobKey
@@ -23,7 +23,7 @@ release_adMobBanner=ca-app-pub-AdMobBanner
 release_fabricApiKey=FabricApiKey
 ```
 
-* Rename  ** config-template.properties ** to ** config.properties ** .
+* Rename  **config-template.properties** to **config.properties**.
 * Build!
 
 ## Screenshots
