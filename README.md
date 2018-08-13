@@ -30,6 +30,7 @@ keyPassword=yourKeyPassword
 storeFile=C:/your/directory/ForKeyStore.jks
 storePassword=yourStorePassword
 ```
+* Rename  **keystore-template.properties** to **keystore.properties**.
 * Build Debug or Release!
 
 ## Screenshots
