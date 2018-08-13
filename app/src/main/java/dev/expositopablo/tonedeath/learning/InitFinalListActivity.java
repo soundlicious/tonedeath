@@ -1,5 +1,6 @@
 package dev.expositopablo.tonedeath.learning;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -155,11 +156,12 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
                             .replace(R.id.initfinal_detail_container, fragment)
                             .commit();
                 } else {
+                    Bundle bundleTransition = ActivityOptions.makeSceneTransitionAnimation(mParentActivity).toBundle();
                     Context context = view.getContext();
                     Intent intent = new Intent(context, InitFinalDetailActivity.class);
                     intent.putExtra(InitFinalDetailFragment.ARG_ITEM, item);
                     intent.putExtra(InitFinalDetailFragment.ARG_ISINITIAL_MAIN, mParentActivity.viewModel.isInitialFirst());
-                    context.startActivity(intent);
+                    context.startActivity(intent, bundleTransition);
                 }
             }
         };

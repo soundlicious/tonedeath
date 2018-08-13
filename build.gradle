@@ -34,7 +34,7 @@ allprojects {
         jcenter()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.fabric.io/public' }
-        maven { url  "http://dl.bintray.com/piasy/maven" }
+        maven { url "http://dl.bintray.com/piasy/maven" }
     }
 }
 
@@ -43,9 +43,13 @@ ext {
     adMobAppToken = configProperties['release_adMob']
     adMobRecompenseAppToken = configProperties['release_adMobRecompense']
     adMobBannerAppToken = configProperties['release_adMobBanner']
-    adMobRecompenseAppTokenTest = "ca-app-pub-3940256099942544/5224354917"
-    adMobBannerAppTokenTest = "ca-app-pub-3940256099942544/6300978111"
+    adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
+    adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
     fabricApiKey = configProperties['release_fabricApiKey']
+    keyAlias = configProperties['keyAlias']
+    keyPassword = configProperties['keyPassword']
+    storeFile = configProperties['storeFile']
+    storePassword = configProperties['storePassword']
 
     versionMajor = 0
     versionMinor = 1

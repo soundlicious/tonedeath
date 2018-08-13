@@ -6,7 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -49,6 +52,11 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_listening);
         ButterKnife.bind(this);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         Pinyin pinyin = getIntent().getParcelableExtra(PINYIN);
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListeningViewModel.class);
@@ -66,6 +74,22 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
         super.onResume();
         viewModel.getPinyin().observe(this, value -> pinyin.setText(value.toString()));
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     @Override

@@ -1,6 +1,6 @@
 # ToneDeath [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5c2016587d3c40afb3d653074eb47f3b)](https://www.codacy.com/project/soundlicious/ToneDeath/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=soundlicious/ToneDeath&amp;utm_campaign=Badge_Grade_Dashboard) [![Udacity Badge](https://badgen.net/badge/udacity/Android%20Nanodegree/blue)](https://www.udacity.com/nanodegree) [![License Badge](https://badgen.net/badge/license/MIT/green)](https://github.com/soundlicious/ToneDeath/blob/master/LICENSE) [![Platform Badge](https://badgen.net/badge/platform/Android/green)]()
 
-*“Dear laowai, I see you struggling with the Chinese (Mandarin) tones, we offer you a last chance to save your ear but in case of mistakes, be sure to bring enough coins for the afterlife!”*
+*“Dear laowai, we see you struggling with the Chinese (Mandarin) tones, we offer you a last chance to save your ear but in case of mistakes, be sure to bring enough coins for the afterlife!”*
 
 *[From Fan Wujiu & Xie Bian](https://en.wikipedia.org/wiki/Heibai_Wuchang)*
 
@@ -15,16 +15,22 @@
 ## How to build
 
 * Edit **config-template.properties** at the root of the project with you own [AdMob](https://firebase.google.com/docs/admob/android/quick-start) and [Craslytics](https://firebase.google.com/docs/crashlytics/get-started) credentials.
-
 ```
-release_adMob=ca-app-pub-AdMobKey
-release_adMobRecompense=ca-app-pub-AdMobRewardKey
-release_adMobBanner=ca-app-pub-AdMobBanner
-release_fabricApiKey=FabricApiKey
+release_adMob="ca-app-pub-AdMobKey"
+release_adMobRecompense="ca-app-pub-AdMobRewardKey"
+release_adMobBanner="ca-app-pub-AdMobBanner"
+release_fabricApiKey="FabricApiKey"
 ```
 
 * Rename  **config-template.properties** to **config.properties**.
-* Build!
+* Edit **keystore-template.properties** at the root of the project with your own keystore's credentials
+```
+keyAlias=yourKeyAlias
+keyPassword=yourKeyPassword
+storeFile=C:/your/directory/ForKeyStore.jks
+storePassword=yourStorePassword
+```
+* Build Debug or Release!
 
 ## Screenshots
 

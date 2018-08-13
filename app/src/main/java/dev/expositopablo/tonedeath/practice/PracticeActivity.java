@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import dev.expositopablo.tonedeath.BuildConfig;
 import dev.expositopablo.tonedeath.R;
 import dev.expositopablo.tonedeath.uselesswidget.UselessWidget;
 
@@ -58,7 +59,7 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PracticeViewModel.class);
 
-        MobileAds.initialize(this, getString(R.string.ADMOB_TOKEN));
+        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
 
         // Use an activity context to get the rewarded video instance.
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
@@ -151,8 +152,7 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     //region Ad
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd(getString(R.string.ADMOB_RECOMPENSE_TOKEN),
-                new AdRequest.Builder().build());
+        mRewardedVideoAd.loadAd(BuildConfig.ADMOB_RECOMPENSE_TOKEN, new AdRequest.Builder().build());
     }
 
     @Override

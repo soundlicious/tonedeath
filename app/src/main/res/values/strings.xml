@@ -32,4 +32,5 @@
     <string name="game_over_text">Listen to the difference between those tones</string>
     <string name="initial">Initials</string>
     <string name="finals">Finals</string>
+    <string name="switchList">switch</string>
 </resources>

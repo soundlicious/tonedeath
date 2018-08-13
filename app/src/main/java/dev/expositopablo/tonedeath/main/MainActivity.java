@@ -1,5 +1,6 @@
 package dev.expositopablo.tonedeath.main;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         learningButton.setOnClickListener(this);
         practiceButton.setOnClickListener(this);
 
-        MobileAds.initialize(this, getString(R.string.ADMOB_TOKEN));
+        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
 
     }
 
@@ -89,12 +91,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Bundle bundleTransition = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
         switch (view.getId()) {
             case R.id.button_main_learning:
-                startActivity(new Intent(this, InitFinalListActivity.class));
+                startActivity(new Intent(this, InitFinalListActivity.class), bundleTransition);
                 break;
             case R.id.button_main_practice:
-                startActivity(new Intent(this, PracticeActivity.class));
+                startActivity(new Intent(this, PracticeActivity.class), bundleTransition);
                 break;
             default: //Nothing
         }

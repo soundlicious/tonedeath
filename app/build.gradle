@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
+    signingConfigs {
+        release
+    }
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
@@ -16,23 +19,41 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            resValue "string", "FABRICAPIKEY", "${rootProject.fabricApiKey}"
-            resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
-            resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppTokenTest}"
+            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
+            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppTokenTest}"
             resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppTokenTest}"
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue "string", "FABRICAPIKEY", "${rootProject.fabricApiKey}"
-            resValue "string", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
-            resValue "string", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppToken}"
+            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
+            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppToken}"
             resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppToken}"
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        manifestPlaceholders = [fabric_api_key: "${rootProject.fabricApiKey}"]
+    }
+}
+
+allprojects {
+    afterEvaluate { project ->
+        def keyStoreConfigFile = rootProject.file('keystore.properties')
+        def configName = 'release'
+
+        if (keyStoreConfigFile.exists() && android.signingConfigs.hasProperty(configName)) {
+            def keyStoreProperties = new Properties()
+            keyStoreProperties.load(new FileInputStream(keyStoreConfigFile))
+            android.signingConfigs[configName].storeFile = file(keyStoreProperties['storeFile'])
+            android.signingConfigs[configName].storePassword = keyStoreProperties['storePassword']
+            android.signingConfigs[configName].keyAlias = keyStoreProperties['keyAlias']
+            android.signingConfigs[configName].keyPassword = keyStoreProperties['keyPassword']
+        }
     }
 }
 
@@ -49,6 +70,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$supportLib"
     implementation "com.android.support:design:$supportLib"
     implementation "com.android.support.constraint:constraint-layout:$constraintLib"
+
     //endregion
 
     //region UI
@@ -56,6 +78,7 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
     implementation "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"
+
     //endregion
 
     //region ArchComponent
@@ -64,6 +87,7 @@ dependencies {
     androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
     implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
     annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
+
     //endregion
 
     //region Dependency Injection
@@ -71,11 +95,13 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:$dagger"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
+
     //endregion
 
     //region GoogleServices
     implementation "com.google.firebase:firebase-core:$firebase"
     implementation "com.google.android.gms:play-services-ads:$playService"
+
     //endregion
 
     //region Testing && Debug
@@ -88,9 +114,10 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
     debugImplementation "com.amitshekhar.android:debug-db:$debugDB"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
-    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics"){
+    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics") {
         transitive = true
     }
+
     //endregion
 }
 

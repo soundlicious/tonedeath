@@ -1,5 +1,6 @@
 package dev.expositopablo.tonedeath.learning;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -72,9 +73,11 @@ public class InitFinalDetailActivity extends AppCompatActivity implements InitFi
 
     @Override
     public void onDetailSelected(Pinyin pinyin) {
+        Bundle bundleTransition = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+
         Intent intent = new Intent(this, ListeningActivity.class);
         intent.putExtra(ListeningActivity.PINYIN, pinyin);
-        startActivity(intent);
+        startActivity(intent, bundleTransition);
     }
 
     @Override

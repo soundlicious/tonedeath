@@ -22,7 +22,7 @@
         </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
-            android:value="@string/FABRICAPIKEY" />
+            android:value="${fabric_api_key}" />
 
         <activity android:name=".practice.PracticeActivity"
             android:parentActivityName=".main.MainActivity">
@@ -49,7 +49,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
         </activity>
-        <activity android:name=".learning.ListeningActivity"/>
+        <activity android:name=".learning.ListeningActivity"
+            android:parentActivityName=".learning.InitFinalListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
+        </activity>
 
         <receiver android:name=".uselesswidget.UselessWidget">
             <intent-filter>

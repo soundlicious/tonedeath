@@ -32,6 +32,7 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_InitFinalList_switch"
+        android:contentDescription="@string/switchList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
