@@ -5,30 +5,30 @@ android {
     signingConfigs {
         release
     }
-    compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion rootProject.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "dev.expositopablo.tonedeath"
-        minSdkVersion rootProject.minSdkVersion
-        targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
-            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppTokenTest}"
-            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppTokenTest}"
+            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.ext.adMobAppToken}"
+            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.ext.adMobRecompenseAppTokenTest}"
+            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.ext.adMobBannerAppTokenTest}"
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.adMobAppToken}"
-            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.adMobRecompenseAppToken}"
-            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.adMobBannerAppToken}"
+            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.ext.adMobAppToken}"
+            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.ext.adMobRecompenseAppToken}"
+            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.ext.adMobBannerAppToken}"
             signingConfig signingConfigs.release
         }
     }
@@ -37,22 +37,31 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        manifestPlaceholders = [fabric_api_key: "${rootProject.fabricApiKey}"]
+        manifestPlaceholders = [fabric_api_key: "${rootProject.ext.fabricApiKey}"]
+    }
+}
+
+ext.setKeystore = { keystore ->
+    def keyStoreConfigFile = rootProject.file(keystore)
+    def configName = 'release'
+
+    if (keyStoreConfigFile.exists() && android.signingConfigs.hasProperty(configName)) {
+        def keyStoreProperties = new Properties()
+        keyStoreProperties.load(new FileInputStream(keyStoreConfigFile))
+        android.signingConfigs[configName].storeFile = file(keyStoreProperties['storeFile'])
+        android.signingConfigs[configName].storePassword = keyStoreProperties['storePassword']
+        android.signingConfigs[configName].keyAlias = keyStoreProperties['keyAlias']
+        android.signingConfigs[configName].keyPassword = keyStoreProperties['keyPassword']
     }
 }
 
 allprojects {
     afterEvaluate { project ->
-        def keyStoreConfigFile = rootProject.file('keystore.properties')
-        def configName = 'release'
-
-        if (keyStoreConfigFile.exists() && android.signingConfigs.hasProperty(configName)) {
-            def keyStoreProperties = new Properties()
-            keyStoreProperties.load(new FileInputStream(keyStoreConfigFile))
-            android.signingConfigs[configName].storeFile = file(keyStoreProperties['storeFile'])
-            android.signingConfigs[configName].storePassword = keyStoreProperties['storePassword']
-            android.signingConfigs[configName].keyAlias = keyStoreProperties['keyAlias']
-            android.signingConfigs[configName].keyPassword = keyStoreProperties['keyPassword']
+        if (System.getenv("CIRCLECI") || System.getenv("TRAVIS")) {
+            setKeystore('keystore-debug.properties')
+        }
+        else {
+            setKeystore('keystore.properties')
         }
     }
 }
@@ -60,65 +69,9 @@ allprojects {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    //region SupportLib
-    implementation "com.android.support:support-v4:$supportLib"
-    implementation "com.android.support:customtabs:$supportLib"
-    implementation "com.android.support:support-v13:$supportLib"
-    implementation "com.android.support:appcompat-v7:$supportLib"
-    implementation "com.android.support:palette-v7:$supportLib"
-    implementation "com.android.support:recyclerview-v7:$supportLib"
-    implementation "com.android.support:cardview-v7:$supportLib"
-    implementation "com.android.support:design:$supportLib"
-    implementation "com.android.support.constraint:constraint-layout:$constraintLib"
-
-    //endregion
-
-    //region UI
-    implementation "blue.aodev:material-values:$materialValues"
-    implementation "com.jakewharton:butterknife:$butterknife"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
-    implementation "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"
-
-    //endregion
-
-    //region ArchComponent
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
-    implementation "android.arch.lifecycle:extensions:$archLifecycleVersion"
-    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycleVersion"
-
-    //endregion
-
-    //region Dependency Injection
-    implementation "com.google.dagger:dagger-android:$dagger"
-    implementation "com.google.dagger:dagger-android-support:$dagger"
-    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger"
-    annotationProcessor "com.google.dagger:dagger-compiler:$dagger"
-
-    //endregion
-
-    //region GoogleServices
-    implementation "com.google.firebase:firebase-core:$firebase"
-    implementation "com.google.android.gms:play-services-ads:$playService"
-
-    //endregion
-
-    //region Testing && Debug
-    implementation "com.jakewharton.timber:timber:$timber"
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "com.android.support.test:runner:$runner"
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$espresso", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
-    debugImplementation "com.amitshekhar.android:debug-db:$debugDB"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"
-    implementation("com.crashlytics.sdk.android:crashlytics:$rootProject.crashlytics") {
-        transitive = true
+    rootProject.ext.dependencies.each {
+        add(it.configuration, it.dependency, it.options)
     }
-
-    //endregion
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'buildConf/dependencies.gradle'
 
 buildscript {
 
@@ -7,25 +8,17 @@ buildscript {
         google()
         jcenter()
         maven {
-            url 'https://maven.fabric.io/public'
-        }
+            url 'https://maven.fabric.io/public'        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.4'
-        classpath 'com.google.gms:google-services:4.0.0'
+        classpath 'com.google.gms:google-services:4.0.1'
         classpath 'io.fabric.tools:gradle:1.25.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
-ext.valueDir = { valueDir ->
-    return "app\\src\\main\\res\\" + valueDir + "\\strings.xml"
-}
-
-Properties configProperties = new Properties()
-configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
 
 allprojects {
     repositories {
@@ -36,71 +29,6 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "http://dl.bintray.com/piasy/maven" }
     }
-}
-
-ext {
-    //region AppVersion
-    adMobAppToken = configProperties['release_adMob']
-    adMobRecompenseAppToken = configProperties['release_adMobRecompense']
-    adMobBannerAppToken = configProperties['release_adMobBanner']
-    adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
-    adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
-    fabricApiKey = configProperties['release_fabricApiKey']
-    keyAlias = configProperties['keyAlias']
-    keyPassword = configProperties['keyPassword']
-    storeFile = configProperties['storeFile']
-    storePassword = configProperties['storePassword']
-
-    versionMajor = 0
-    versionMinor = 1
-    versionPatch = 0
-    versionBuild = 1
-
-    versionCode = versionMajor * 1000000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
-    versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
-    //endregion
-
-    //region SDK && Tools
-    minSdkVersion = 21
-    targetSdkVersion = 28
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.1'
-    //endregion
-
-    //region Support
-    supportLib = '28.0.0-rc01'
-    constraintLib = '1.1.2'
-    //endregion
-
-    //region UI
-    materialValues = '1.1.1'
-    butterknife = '8.8.1'
-    sweetAlertDialog = 'v1.4.0'
-    //endregion
-
-    //region ArchComponent
-    roomVersion = '1.1.1'
-    archLifecycleVersion = '1.1.1'
-    //endregion
-
-    //region Dependency Injection
-    dagger = '2.16'
-    //endregion
-
-    //region GoogleServices
-    firebase = '16.0.1'
-    playService = '15.0.1'
-    //endregion
-
-    //region Testing && Debug
-    debugDB = '1.0.4'
-    timber = '4.7.1'
-    junit = '4.12'
-    runner = '1.0.2'
-    espresso = '3.0.2'
-    leakCanary = '1.5.4'
-    crashlytics = '2.9.4'
-    //endregion
 }
 
 task clean(type: Delete) {
