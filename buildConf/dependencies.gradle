@@ -16,11 +16,11 @@ ext {
         storeFile = configProperties['storeFile']
         storePassword = configProperties['storePassword']
     } else {
-        adMobAppToken = System.getenv('release_adMob')
-        adMobRecompenseAppToken = System.getenv('release_adMobRecompense')
-        adMobBannerAppToken = System.getenv('release_adMobBanner')
-        adMobRecompenseAppTokenTest = System.getenv('debug_adMobRecompense')
-        adMobBannerAppTokenTest = System.getenv('debug_adMobBanner')
+        adMobAppToken = "${System.getenv('release_adMob')}"
+        adMobRecompenseAppToken = "${System.getenv('release_adMobRecompense')}"
+        adMobBannerAppToken = "${System.getenv('release_adMobBanner')}"
+        adMobRecompenseAppTokenTest = "${System.getenv('debug_adMobRecompense')}"
+        adMobBannerAppTokenTest = "${System.getenv('debug_adMobBanner')}"
         fabricApiKey = System.getenv('release_fabricApiKey')
 
     }
