@@ -1,18 +1,29 @@
 ext {
     Properties configProperties = new Properties()
-    configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
+    if (System.getenv('TRAVIS') == null) {
+        configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
 
-    //region API KEY
-    adMobAppToken = configProperties['release_adMob']
-    adMobRecompenseAppToken = configProperties['release_adMobRecompense']
-    adMobBannerAppToken = configProperties['release_adMobBanner']
-    adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
-    adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
-    fabricApiKey = configProperties['release_fabricApiKey']
-    keyAlias = configProperties['keyAlias']
-    keyPassword = configProperties['keyPassword']
-    storeFile = configProperties['storeFile']
-    storePassword = configProperties['storePassword']
+        //region API KEY
+        adMobAppToken = configProperties['release_adMob']
+        adMobRecompenseAppToken = configProperties['release_adMobRecompense']
+        adMobBannerAppToken = configProperties['release_adMobBanner']
+        adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
+        adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
+        fabricApiKey = configProperties['release_fabricApiKey']
+
+        keyAlias = configProperties['keyAlias']
+        keyPassword = configProperties['keyPassword']
+        storeFile = configProperties['storeFile']
+        storePassword = configProperties['storePassword']
+    } else {
+        adMobAppToken = System.getenv('release_adMob')
+        adMobRecompenseAppToken = System.getenv('release_adMobRecompense')
+        adMobBannerAppToken = System.getenv('release_adMobBanner')
+        adMobRecompenseAppTokenTest = System.getenv('debug_adMobRecompense')
+        adMobBannerAppTokenTest = System.getenv('debug_adMobBanner')
+        fabricApiKey = System.getenv('release_fabricApiKey')
+
+    }
     //endregion
 
     //region Version
@@ -85,7 +96,7 @@ ext {
             [configuration: "annotationProcessor", dependency: "com.jakewharton:butterknife-compiler:$butterknife"],
             [configuration: "implementation", dependency: "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"],
             [configuration: "implementation", dependency: "android.arch.persistence.room:runtime:$roomVersion"],
-            [configuration: "implementation", dependency: "android.arch.persistence.room:compiler:$roomVersion"],
+            [configuration: "annotationProcessor", dependency: "android.arch.persistence.room:compiler:$roomVersion"],
             [configuration: "androidTestImplementation", dependency: "android.arch.persistence.room:testing:$roomVersion"],
             [configuration: "implementation", dependency: "android.arch.lifecycle:extensions:$archLifecycleVersion"],
             [configuration: "annotationProcessor", dependency: "android.arch.lifecycle:compiler:$archLifecycleVersion"],
@@ -99,9 +110,7 @@ ext {
             [configuration: "testImplementation", dependency: "junit:junit:$junit"],
             [configuration: "androidTestImplementation", dependency: "com.android.support.test:runner:$runner"],
             [configuration: "androidTestImplementation", dependency: "com.android.support.test.espresso:espresso-core:$espresso", options: supportAnnotationExclude],
-            [configuration: "debugImplementation", dependency: "com.squareup.leakcanary:leakcanary-android:$leakCanary"],
             [configuration: "debugImplementation", dependency: "com.amitshekhar.android:debug-db:$debugDB"],
-            [configuration: "implementation", dependency: "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanary"],
             [configuration: "implementation", dependency: "com.crashlytics.sdk.android:crashlytics:$crashlytics", options: {transitive true}],
     ]
     //endregion

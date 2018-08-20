@@ -40,28 +40,29 @@ android {
         manifestPlaceholders = [fabric_api_key: "${rootProject.ext.fabricApiKey}"]
     }
 }
-
-ext.setKeystore = { keystore ->
-    def keyStoreConfigFile = rootProject.file(keystore)
+ext.setSigningConfig = { storeFile, storePassword, keyAlias, keyPassword ->
     def configName = 'release'
-
-    if (keyStoreConfigFile.exists() && android.signingConfigs.hasProperty(configName)) {
-        def keyStoreProperties = new Properties()
-        keyStoreProperties.load(new FileInputStream(keyStoreConfigFile))
-        android.signingConfigs[configName].storeFile = file(keyStoreProperties['storeFile'])
-        android.signingConfigs[configName].storePassword = keyStoreProperties['storePassword']
-        android.signingConfigs[configName].keyAlias = keyStoreProperties['keyAlias']
-        android.signingConfigs[configName].keyPassword = keyStoreProperties['keyPassword']
+    if (android.signingConfigs.hasProperty(configName)) {
+        android.signingConfigs[configName].storeFile = storeFile
+        android.signingConfigs[configName].storePassword = storePassword
+        android.signingConfigs[configName].keyAlias = keyAlias
+        android.signingConfigs[configName].keyPassword = keyPassword
     }
 }
 
 allprojects {
     afterEvaluate { project ->
-        if (System.getenv("CIRCLECI") || System.getenv("TRAVIS")) {
-            setKeystore('keystore-debug.properties')
-        }
-        else {
-            setKeystore('keystore.properties')
+        if (System.getenv("CIRCLECI") != null || System.getenv("TRAVIS") != null) {
+            setSigningConfig(file('keystore-release-debug.jks'), System.getenv('STORE_PASSWORD'),
+                    System.getenv('KEY_ALIAS'), System.getenv('KEY_PASSWORD'))
+        } else {
+            def keyStoreConfigFile = rootProject.file('keystore.properties')
+            if (keyStoreConfigFile.exists()) {
+                def keyStoreProperties = new Properties()
+                keyStoreProperties.load(new FileInputStream(keyStoreConfigFile))
+                setSigningConfig(file(keyStoreProperties['storeFile']), keyStoreProperties['storePassword'],
+                        keyStoreProperties['keyAlias'], keyStoreProperties['keyPassword'])
+            }
         }
     }
 }
