@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -59,7 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         practiceButton.setOnClickListener(this);
 
         MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
-
     }
 
     @Override
