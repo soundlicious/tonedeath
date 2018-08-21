@@ -10,6 +10,13 @@ android:
   - sys-img-armeabi-v7a-android-28
   - sys-img-armeabi-v7a-android-21
 before_install:
+- openssl aes-256-cbc -K $encrypted_d08467eb963f_key -iv $encrypted_d08467eb963f_iv
+  -in config.properties.enc -out config.properties -d
+- openssl aes-256-cbc -K $encrypted_d08467eb963f_key -iv $encrypted_d08467eb963f_iv
+  -in keystore.properties.enc -out keystore.properties -d
 - openssl aes-256-cbc -K $encrypted_a2267fbe3620_key -iv $encrypted_a2267fbe3620_iv
   -in ./app/google-services.json.enc -out ./app/google-services.json -d
 - chmod +x gradlew
+env:
+  global:
+    secure: MoOJT2HTHE8mp59/pQnoIaVNTQoRZiZNioRe0RlOQQ4JpUGG3wTJ/oET4WFQDFnHc8QhZdpOSmgCjJOiJcatN0cXF1mbm/3U11vhJGLybcx5cG9A/rDuxtV5GqFGPgj45YZGei9Opo387e+TmLG6R/QXI3SyLAPoHw9PuqwJiFXDPNzav8KwWR2o4HDdLgmqsrvhi9W7kzKeA2+DCVL7HDkTiw1o6Oo/CmyZyyAKNgEXafni0w7Snsm3ptRLwndt4nQfMjUIWdxo5kMhQN6+ZRKezmNE1ildAjxgeNNpTL7zUFMC0YsuufQ1gqTjDhuVDh2HUls6DkvExoTDH9uBjlcB3w3le+gUWEJDcO+GT1uB/uvvBTpH3msXJpe7LHlnTKgapVvO3yyrIzFojMFflY3EQZKKdC9doha0JM4ZvCKF07zjxGR8q2PL0vGhbRIOzGYkTP3uApmjLmWxP3IRfff3DHjwMPGBELwvLJI61SJvXdkG1VzvyMKTt2VyBgo1Uop/pZ05Dr6kUs+N3LxpZmycnJGGASwiRws6HcxiO13xcG8e8b/IskSbGqs9iJJWhL+CSxZf1OWbj8zazxsUYzkNa+jl10tEwy7NTEG557nn8PLe8x0lNF4EINk97dGGq1GUYJWLwVvCMq+Uvc/6/iOMVA59iLp7Bv8f8RvGI6A=

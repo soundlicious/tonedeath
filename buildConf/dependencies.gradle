@@ -1,29 +1,19 @@
 ext {
     Properties configProperties = new Properties()
-    if (System.getenv('TRAVIS') == null) {
-        configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
+    configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
 
-        //region API KEY
-        adMobAppToken = configProperties['release_adMob']
-        adMobRecompenseAppToken = configProperties['release_adMobRecompense']
-        adMobBannerAppToken = configProperties['release_adMobBanner']
-        adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
-        adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
-        fabricApiKey = configProperties['release_fabricApiKey']
+    //region API KEY
+    adMobAppToken = configProperties['release_adMob']
+    adMobRecompenseAppToken = configProperties['release_adMobRecompense']
+    adMobBannerAppToken = configProperties['release_adMobBanner']
+    adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
+    adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
+    fabricApiKey = configProperties['release_fabricApiKey']
 
-        keyAlias = configProperties['keyAlias']
-        keyPassword = configProperties['keyPassword']
-        storeFile = configProperties['storeFile']
-        storePassword = configProperties['storePassword']
-    } else {
-        adMobAppToken = "${System.getenv('release_adMob')}"
-        adMobRecompenseAppToken = "${System.getenv('release_adMobRecompense')}"
-        adMobBannerAppToken = "${System.getenv('release_adMobBanner')}"
-        adMobRecompenseAppTokenTest = "${System.getenv('debug_adMobRecompense')}"
-        adMobBannerAppTokenTest = "${System.getenv('debug_adMobBanner')}"
-        fabricApiKey = System.getenv('release_fabricApiKey')
-
-    }
+    keyAlias = configProperties['keyAlias']
+    keyPassword = configProperties['keyPassword']
+    storeFile = configProperties['storeFile']
+    storePassword = configProperties['storePassword']
     //endregion
 
     //region Version
