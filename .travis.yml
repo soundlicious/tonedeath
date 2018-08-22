@@ -1,14 +1,33 @@
+env:
+  global:
+    secure: MoOJT2HTHE8mp59/pQnoIaVNTQoRZiZNioRe0RlOQQ4JpUGG3wTJ/oET4WFQDFnHc8QhZdpOSmgCjJOiJcatN0cXF1mbm/3U11vhJGLybcx5cG9A/rDuxtV5GqFGPgj45YZGei9Opo387e+TmLG6R/QXI3SyLAPoHw9PuqwJiFXDPNzav8KwWR2o4HDdLgmqsrvhi9W7kzKeA2+DCVL7HDkTiw1o6Oo/CmyZyyAKNgEXafni0w7Snsm3ptRLwndt4nQfMjUIWdxo5kMhQN6+ZRKezmNE1ildAjxgeNNpTL7zUFMC0YsuufQ1gqTjDhuVDh2HUls6DkvExoTDH9uBjlcB3w3le+gUWEJDcO+GT1uB/uvvBTpH3msXJpe7LHlnTKgapVvO3yyrIzFojMFflY3EQZKKdC9doha0JM4ZvCKF07zjxGR8q2PL0vGhbRIOzGYkTP3uApmjLmWxP3IRfff3DHjwMPGBELwvLJI61SJvXdkG1VzvyMKTt2VyBgo1Uop/pZ05Dr6kUs+N3LxpZmycnJGGASwiRws6HcxiO13xcG8e8b/IskSbGqs9iJJWhL+CSxZf1OWbj8zazxsUYzkNa+jl10tEwy7NTEG557nn8PLe8x0lNF4EINk97dGGq1GUYJWLwVvCMq+Uvc/6/iOMVA59iLp7Bv8f8RvGI6A=
+
+
 language: android
+jdk: oraclejdk8
+env:
+ global:
+    - ANDROID_API_LEVEL=27
+    - ANDROID_BUILD_TOOLS_VERSION=27.0.1
+    secure: MoOJT2HTHE8mp59/pQnoIaVNTQoRZiZNioRe0RlOQQ4JpUGG3wTJ/oET4WFQDFnHc8QhZdpOSmgCjJOiJcatN0cXF1mbm/3U11vhJGLybcx5cG9A/rDuxtV5GqFGPgj45YZGei9Opo387e+TmLG6R/QXI3SyLAPoHw9PuqwJiFXDPNzav8KwWR2o4HDdLgmqsrvhi9W7kzKeA2+DCVL7HDkTiw1o6Oo/CmyZyyAKNgEXafni0w7Snsm3ptRLwndt4nQfMjUIWdxo5kMhQN6+ZRKezmNE1ildAjxgeNNpTL7zUFMC0YsuufQ1gqTjDhuVDh2HUls6DkvExoTDH9uBjlcB3w3le+gUWEJDcO+GT1uB/uvvBTpH3msXJpe7LHlnTKgapVvO3yyrIzFojMFflY3EQZKKdC9doha0JM4ZvCKF07zjxGR8q2PL0vGhbRIOzGYkTP3uApmjLmWxP3IRfff3DHjwMPGBELwvLJI61SJvXdkG1VzvyMKTt2VyBgo1Uop/pZ05Dr6kUs+N3LxpZmycnJGGASwiRws6HcxiO13xcG8e8b/IskSbGqs9iJJWhL+CSxZf1OWbj8zazxsUYzkNa+jl10tEwy7NTEG557nn8PLe8x0lNF4EINk97dGGq1GUYJWLwVvCMq+Uvc/6/iOMVA59iLp7Bv8f8RvGI6A=
+
 android:
-  components:
-  - build-tools-28.0.1
-  - android-28
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-28
-  - sys-img-armeabi-v7a-android-28
-  - sys-img-armeabi-v7a-android-21
+ licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+ components:
+    - tools
+    - platform-tools
+    # The BuildTools version used by your project
+    - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+    # The SDK version used to compile your project
+    - android-$ANDROID_API_LEVEL
+    # Additional components
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-$ANDROID_API_LEVEL
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_d08467eb963f_key -iv $encrypted_d08467eb963f_iv
@@ -18,10 +37,12 @@ before_install:
 - chmod +x gradlew
 
 before_script:
-  - echo no | android create avd --force -n test -t android-28 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
+    # Prepare pre-accepted licenses to not be promted at installation
+    - mkdir -p "$ANDROID_HOME/licenses"
+    - cp ./google-licenses/* "$ANDROID_HOME/licenses/"
+      - echo no | android create avd --force -n test -t android-$ANDROID_API_LEVEL --abi armeabi-v7a
+      - emulator -avd test -no-skin -no-audio -no-window &
+      - android-wait-for-emulator
 
-env:
-  global:
-    secure: MoOJT2HTHE8mp59/pQnoIaVNTQoRZiZNioRe0RlOQQ4JpUGG3wTJ/oET4WFQDFnHc8QhZdpOSmgCjJOiJcatN0cXF1mbm/3U11vhJGLybcx5cG9A/rDuxtV5GqFGPgj45YZGei9Opo387e+TmLG6R/QXI3SyLAPoHw9PuqwJiFXDPNzav8KwWR2o4HDdLgmqsrvhi9W7kzKeA2+DCVL7HDkTiw1o6Oo/CmyZyyAKNgEXafni0w7Snsm3ptRLwndt4nQfMjUIWdxo5kMhQN6+ZRKezmNE1ildAjxgeNNpTL7zUFMC0YsuufQ1gqTjDhuVDh2HUls6DkvExoTDH9uBjlcB3w3le+gUWEJDcO+GT1uB/uvvBTpH3msXJpe7LHlnTKgapVvO3yyrIzFojMFflY3EQZKKdC9doha0JM4ZvCKF07zjxGR8q2PL0vGhbRIOzGYkTP3uApmjLmWxP3IRfff3DHjwMPGBELwvLJI61SJvXdkG1VzvyMKTt2VyBgo1Uop/pZ05Dr6kUs+N3LxpZmycnJGGASwiRws6HcxiO13xcG8e8b/IskSbGqs9iJJWhL+CSxZf1OWbj8zazxsUYzkNa+jl10tEwy7NTEG557nn8PLe8x0lNF4EINk97dGGq1GUYJWLwVvCMq+Uvc/6/iOMVA59iLp7Bv8f8RvGI6A=
+script:
+    - ./gradlew build check
