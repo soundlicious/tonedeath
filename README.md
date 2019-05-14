@@ -60,9 +60,13 @@ Dependency          |  Description
 
 ## Todo
 
-- [ ] Record and add audio files to the project.
-
-## Issues
+- [x] Record and add audio files to the project.
+- [ ] Convert to Kotlin
+- [ ] Replace Gradle with Koin
+- [ ] Add About page and quote licences
+- [ ] Change Icon
+- [ ] Better Architecture and use of LiveData
+- [ ] Unit Tests
 
 ## Licenses
 

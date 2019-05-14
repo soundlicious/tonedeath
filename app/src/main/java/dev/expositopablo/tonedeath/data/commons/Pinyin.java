@@ -7,6 +7,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 @Entity(tableName = "pinyin_table")
 public class Pinyin implements Parcelable {
     @PrimaryKey(autoGenerate = true)
@@ -16,18 +20,24 @@ public class Pinyin implements Parcelable {
     @NonNull
     @ColumnInfo(name = "Initial")
     public final String Initial;
+
     @NonNull
     @ColumnInfo(name = "Final")
     public final String Final;
 
-    public Pinyin(@NonNull String Initial, @NonNull String Final) {
+    @NonNull
+    @ColumnInfo(name = "ToneVoyelle")
+    public final String ToneVoyelle;
+
+    public Pinyin(@NonNull String Initial, @NonNull String Final, @NonNull String ToneVoyelle) {
         this.Initial = Initial;
         this.Final = Final;
+        this.ToneVoyelle = ToneVoyelle;
     }
 
     @Override
     public String toString() {
-        return Initial+Final;
+        return (Initial+Final).replace("∅", "");
     }
 
     @Override
@@ -53,6 +63,11 @@ public class Pinyin implements Parcelable {
         return Final;
     }
 
+    @NonNull
+    public String getToneVoyelle() {
+        return ToneVoyelle;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,12 +78,14 @@ public class Pinyin implements Parcelable {
         dest.writeValue(this.ID);
         dest.writeString(this.Initial);
         dest.writeString(this.Final);
+        dest.writeString(this.ToneVoyelle);
     }
 
     protected Pinyin(Parcel in) {
         this.ID = (Long) in.readValue(Long.class.getClassLoader());
         this.Initial = in.readString();
         this.Final = in.readString();
+        this.ToneVoyelle = in.readString();
     }
 
     public static final Parcelable.Creator<Pinyin> CREATOR = new Parcelable.Creator<Pinyin>() {

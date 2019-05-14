@@ -68,6 +68,27 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
         tone2.setOnClickListener(this);
         tone3.setOnClickListener(this);
         tone4.setOnClickListener(this);
+
+        viewModel.audioStatus.observe(this, name -> {
+            System.out.println("observeAudioStatus:" + name);
+            if (name != null) {
+                playAudio(name);
+            }
+        });
+    }
+
+    private void playAudio(String name) {
+        System.out.println("playAudio:" + name);
+        int resID = getResources().getIdentifier(name, "raw", getPackageName());
+        mediaPlayer = MediaPlayer.create(this, resID);
+        mediaPlayer.setOnCompletionListener(mediaPlayer -> {
+            enableClick();
+            mediaPlayer.stop();
+            mediaPlayer.release();
+        });
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        disableClick();
+        mediaPlayer.start();
     }
 
     @Override
@@ -94,33 +115,22 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        String tone = null;
+        System.out.println("onClick");
         switch (view.getId()) {
             case R.id.button_listening_tone1:
-                tone = Constants.TONES.get(0);
+                viewModel.getAudio(Constants.TONES.get(0));
                 break;
             case R.id.button_listening_tone2:
-                tone = Constants.TONES.get(1);
+                viewModel.getAudio(Constants.TONES.get(1));
                 break;
             case R.id.button_listening_tone3:
-                tone = Constants.TONES.get(2);
+                viewModel.getAudio(Constants.TONES.get(2));
                 break;
             case R.id.button_listening_tone4:
-                tone = Constants.TONES.get(3);
+                viewModel.getAudio(Constants.TONES.get(3));
                 break;
             default: //Nothing
         }
-        String fileName = tone;
-        int resID = getResources().getIdentifier(fileName, "raw", getPackageName());
-        mediaPlayer = MediaPlayer.create(this, resID);
-        mediaPlayer.setOnCompletionListener(mediaPlayer -> {
-            enableClick();
-            mediaPlayer.stop();
-            mediaPlayer.release();
-        });
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        disableClick();
-        mediaPlayer.start();
     }
 
     private void disableClick() {

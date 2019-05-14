@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +21,6 @@ import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dev.expositopablo.tonedeath.R;
-import dev.expositopablo.tonedeath.data.commons.Pinyin;
 
 public class GameOverFragment extends Fragment {
 
@@ -105,30 +103,30 @@ public class GameOverFragment extends Fragment {
     }
 
     private void setButton() {
+        String voice = mListener.getViewModel().getOldVoice();
+        String pinyin = mListener.getViewModel().getOldPinyin().toString();
         mListener.getViewModel().getOldTone().observe(getActivity(), value -> {
-            setImage(good, value);
+            setImage(good, pinyin, value, voice);
         });
         mListener.getViewModel().getToneAnswer().observe(getActivity(), value -> {
-            setImage(bad, value);
-
+            setImage(bad, pinyin, value, voice);
         });
     }
 
-    private void setImage(ImageButton button, String value) {
+    private void setImage(ImageButton button, String pinyin, String value, String voice) {
         Context context = getActivity();
         if (context != null) {
             int resID = getResources().getIdentifier(value, "drawable", context.getPackageName());
             button.setImageResource(resID);
-            button.setOnClickListener(view -> playSound(value));
+            button.setOnClickListener(view -> playSound(pinyin, value, voice));
 
         }
     }
 
-    private void playSound(String value) {
-        Pinyin pinyin = mListener.getViewModel().getOldPinyin();
+    private void playSound(String pinyin, String value, String voice) {
         if (mediaPlayer != null)
             mediaPlayer.release();
-        int resID = getResources().getIdentifier(value, "raw", getActivity().getPackageName());
+        int resID = getResources().getIdentifier(pinyin + "_" + value + "_" + voice,  "raw", getActivity().getPackageName());
         mediaPlayer = MediaPlayer.create(getContext(), resID);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.start();

@@ -118,7 +118,7 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
     public static int calculateNoOfColumns(Context context) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        int scalingFactor = 200;
+        int scalingFactor = 500;
         int columnCount = (int) (dpWidth / scalingFactor);
         return (columnCount >= 2 ? columnCount : 2);
     }
@@ -198,12 +198,46 @@ public class InitFinalListActivity extends AppCompatActivity implements InitFina
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_brown_700));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_grey_700));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_grey_700));
+
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_red_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_pink_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_purple_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_deep_purple_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_indigo_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_light_blue_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_cyan_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_teal_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_green_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_light_green_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_lime_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_yellow_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_amber_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_orange_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_deep_orange_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_brown_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_grey_500));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_grey_500));
+
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_red_200));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_pink_200));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_purple_200));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_deep_purple_200));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_indigo_200));
             colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_light_blue_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_cyan_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_teal_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_green_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_light_green_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_lime_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_yellow_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_amber_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_orange_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_deep_orange_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_brown_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_grey_200));
+            colorsList.add(mParentActivity.getResources().getColor(R.color.material_color_blue_grey_200));
         }
 
         @NonNull

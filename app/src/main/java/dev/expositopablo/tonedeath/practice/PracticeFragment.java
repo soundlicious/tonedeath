@@ -187,6 +187,7 @@ public class PracticeFragment extends Fragment implements View.OnClickListener {
     public void playSound() {
         disableClick();
         String fileName = viewModel.getTone();
+        System.out.println(fileName);
         int resID = getResources().getIdentifier(fileName, "raw", getContext().getPackageName());
         mediaPlayer = MediaPlayer.create(getContext(), resID);
         mediaPlayer.setOnCompletionListener(mediaPlayer -> enableClick());

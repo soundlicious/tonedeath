@@ -20,7 +20,7 @@ public interface PinyinDao {
     @Query("SELECT DISTINCT initial from pinyin_table ORDER BY final ASC")
     LiveData<List<String>> getAllDistinctInitial();
 
-    @Query("SELECT DISTINCT final from pinyin_table ORDER BY initial ASC")
+    @Query("SELECT DISTINCT final from pinyin_table ORDER BY final ASC")
     LiveData<List<String>> getAllDistinctFinal();
 
     @Query("SELECT * from pinyin_table WHERE initial = :pInitial ORDER BY initial")

@@ -6,6 +6,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
+import java.net.HttpCookie;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -26,6 +27,9 @@ public class PracticeViewModel extends AndroidViewModel {
     private final MutableLiveData<String> toneAnswer = new MutableLiveData<>();
     private final MutableLiveData<String> oldTone = new MutableLiveData<>();
     private final MutableLiveData<Pinyin> oldPinyin = new MutableLiveData<>();
+    private final MutableLiveData<String> voice = new MutableLiveData<>();
+    private final MutableLiveData<String> oldVoice = new MutableLiveData<>();
+
     private PracticeCallback callback;
 
     @Inject
@@ -35,7 +39,12 @@ public class PracticeViewModel extends AndroidViewModel {
         tone.setValue(Constants.TONES.get(new Random().nextInt(4)));
         score.setValue(0);
         life.setValue(1);
+        voice.setValue(getRandomVoice());
         loadPinyin();
+    }
+
+    private String getRandomVoice() {
+        return "voice" + new Random().nextInt(4);
     }
 
     private void loadPinyin() {
@@ -54,8 +63,10 @@ public class PracticeViewModel extends AndroidViewModel {
         boolean isGoodAnswer = tone.getValue().equals(answer);
         toneAnswer.setValue(answer);
         oldTone.setValue(tone.getValue());
+        oldVoice.setValue(voice.getValue());
         oldPinyin.setValue(pinyin.getValue());
         tone.setValue(Constants.TONES.get(new Random().nextInt(4)));
+        voice.setValue(getRandomVoice());
         loadPinyin();
         if (!isGoodAnswer) {
             life.setValue(0);
@@ -80,7 +91,7 @@ public class PracticeViewModel extends AndroidViewModel {
     }
 
     public String getTone() {
-        return tone.getValue();
+        return pinyin.getValue() + "_" + tone.getValue() + "_" + voice.getValue();
     }
 
     public void setCallback(PracticeCallback callback) {
@@ -113,5 +124,9 @@ public class PracticeViewModel extends AndroidViewModel {
 
     public Pinyin getOldPinyin() {
         return oldPinyin.getValue();
+    }
+
+    public String getOldVoice() {
+        return oldVoice.getValue();
     }
 }
