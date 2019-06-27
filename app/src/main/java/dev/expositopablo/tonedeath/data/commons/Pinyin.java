@@ -37,7 +37,9 @@ public class Pinyin implements Parcelable {
 
     @Override
     public String toString() {
-        return (Initial+Final).replace("∅", "");
+        return (Initial+Final)
+                .replace("∅", "")
+                .replace("ü", "v");
     }
 
     @Override

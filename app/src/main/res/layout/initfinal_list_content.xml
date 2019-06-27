@@ -25,6 +25,8 @@
         android:textColor="@color/material_color_blue_accent"
         android:textStyle="bold"
         tools:text="A"
+        android:lines="1"
+        android:maxLines="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent" />

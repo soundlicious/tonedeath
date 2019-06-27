@@ -130,7 +130,7 @@ public class InitFinalDetailFragment extends Fragment {
         public void onBindViewHolder(final SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
             holder.mContentView.setText(displayInitial?mValues.get(position).getInitial():mValues.get(position).getFinal());
             holder.itemView.setTag("" + position);
-            holder.itemView.setOnClickListener(mOnClickListener);
+            holder.mView.setOnClickListener(mOnClickListener);
         }
 
         @Override
@@ -145,9 +145,11 @@ public class InitFinalDetailFragment extends Fragment {
 
         class ViewHolder extends RecyclerView.ViewHolder {
             private final TextView mContentView;
+            private final View mView;
 
             ViewHolder(View view) {
                 super(view);
+                mView = view;
                 mContentView = view.findViewById(R.id.content);
             }
         }

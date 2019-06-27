@@ -51,8 +51,6 @@ public class ListeningViewModel extends AndroidViewModel {
     public void getAudio(String tone) {
         int voice = new Random().nextInt(4);
         String name = formatPinyinAudioName(pinyin.getValue().toString());
-        System.out.println(pinyin.getValue().toString());
-        System.out.println(name);
         if (name != null) {
             mutableAudioStatus.postValue(name + "_" + tone + "_voice" + voice);
         }
@@ -64,10 +62,7 @@ public class ListeningViewModel extends AndroidViewModel {
             Map.Entry pair = (Map.Entry) o;
             String key = (String) pair.getKey();
             ArrayList<String> values = (ArrayList<String>) pair.getValue();
-            System.out.println(key);
-            System.out.println(name);
             for (String value : values) {
-                System.out.println(value);
                 if (name.contains(value)) {
                     return name.replace(value, key);
                 }

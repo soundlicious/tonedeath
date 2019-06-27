@@ -59,12 +59,12 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PracticeViewModel.class);
 
-        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
-
-        // Use an activity context to get the rewarded video instance.
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
-        loadRewardedVideoAd();
+//        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
+//
+//        // Use an activity context to get the rewarded video instance.
+//        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
+//        mRewardedVideoAd.setRewardedVideoAdListener(this);
+//        loadRewardedVideoAd();
 
         if (savedInstanceState == null) {
             changeFragment(PRACTICE);
@@ -126,7 +126,7 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
     @Override
     public boolean isAdLoaded() {
-        return mRewardedVideoAd.isLoaded();
+        return (mRewardedVideoAd != null)? mRewardedVideoAd.isLoaded() :false;
     }
 
     @Override

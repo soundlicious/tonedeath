@@ -17,10 +17,10 @@ ext {
     //endregion
 
     //region Version
-    versionMajor = 0
-    versionMinor = 1
+    versionMajor = 1
+    versionMinor = 0
     versionPatch = 0
-    versionBuild = 1
+    versionBuild = 0
 
     versionCode = versionMajor * 1000000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName = "${versionMajor}.${versionMinor}.${versionPatch}"

@@ -41,6 +41,18 @@ android {
     defaultConfig {
         manifestPlaceholders = [fabric_api_key: "${rootProject.ext.fabricApiKey}"]
     }
+
+    bundle {
+        language {
+            enableSplit = true
+        }
+        density {
+            enableSplit = true
+        }
+        abi {
+            enableSplit = true
+        }
+    }
 }
 ext.setSigningConfig = { storeFile, storePassword, keyAlias, keyPassword ->
     def configName = 'release'

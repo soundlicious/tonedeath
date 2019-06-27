@@ -70,7 +70,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
         tone4.setOnClickListener(this);
 
         viewModel.audioStatus.observe(this, name -> {
-            System.out.println("observeAudioStatus:" + name);
             if (name != null) {
                 playAudio(name);
             }
@@ -78,7 +77,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void playAudio(String name) {
-        System.out.println("playAudio:" + name);
         int resID = getResources().getIdentifier(name, "raw", getPackageName());
         mediaPlayer = MediaPlayer.create(this, resID);
         mediaPlayer.setOnCompletionListener(mediaPlayer -> {
@@ -94,8 +92,9 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
-        viewModel.getPinyin().observe(this, value -> pinyin.setText(value.toString()));
+        viewModel.getPinyin().observe(this, value -> pinyin.setText(value.getInitial()+value.getFinal()));
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -115,7 +114,6 @@ public class ListeningActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        System.out.println("onClick");
         switch (view.getId()) {
             case R.id.button_listening_tone1:
                 viewModel.getAudio(Constants.TONES.get(0));

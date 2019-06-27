@@ -126,7 +126,8 @@ public class GameOverFragment extends Fragment {
     private void playSound(String pinyin, String value, String voice) {
         if (mediaPlayer != null)
             mediaPlayer.release();
-        int resID = getResources().getIdentifier(pinyin + "_" + value + "_" + voice,  "raw", getActivity().getPackageName());
+        String name = pinyin + "_" + value + "_" + voice;
+        int resID = getResources().getIdentifier(name,  "raw", getActivity().getPackageName());
         mediaPlayer = MediaPlayer.create(getContext(), resID);
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.start();

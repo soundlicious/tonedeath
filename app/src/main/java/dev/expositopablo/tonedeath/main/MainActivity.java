@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onResume() {
         super.onResume();
         displayScore();
-        loadAdBanner();
+//        loadAdBanner();
     }
 
     private void displayScore() {
