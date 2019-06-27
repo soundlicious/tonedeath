@@ -21,3 +21,12 @@
 #-renamesourcefileattribute SourceFile
 -keep class com.ontbee.legacyforks.cn.pedant.SweetAlert.** { *; }
 -keep interface com.ontbee.legacyforks.cn.pedant.SweetAlert.* { *; }
+
+-keepattributes *Annotation*
+-keepattributes SourceFile, LineNumberTable, *Annotation*
+-keep public class * extends java.lang.Exception
+-printmapping mapping.txt
+
+-keep class com.crashlytics.** { *; }
+-keep class com.crashlytics.android.**
+-dontwarn com.crashlytics.**

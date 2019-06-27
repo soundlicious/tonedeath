@@ -54,6 +54,7 @@ android {
         }
     }
 }
+
 ext.setSigningConfig = { storeFile, storePassword, keyAlias, keyPassword ->
     def configName = 'release'
     if (android.signingConfigs.hasProperty(configName)) {
