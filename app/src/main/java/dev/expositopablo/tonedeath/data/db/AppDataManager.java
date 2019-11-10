@@ -17,11 +17,18 @@ import dev.expositopablo.tonedeath.data.db.dao.PinyinDao;
 public class AppDataManager implements DataManager {
     private final SharedPreferences pref;
     private final PinyinDao pinyinDao;
+    private final PinyinDatabase db;
 
     @Inject
     public AppDataManager(PinyinDatabase db, SharedPreferences pref) {
+        this.db = db;
         pinyinDao = db.pinyinDao();
         this.pref = pref;
+    }
+
+    @Override
+    public void initDB(){
+        db.populateDb();
     }
 
     @Override
@@ -48,6 +55,11 @@ public class AppDataManager implements DataManager {
     @Override
     public LiveData<List<String>> getAllDistinctFinal() {
         return pinyinDao.getAllDistinctFinal();
+    }
+
+    @Override
+    public LiveData<Integer> getRowCount() {
+        return pinyinDao.getRowCount();
     }
 
     @Override

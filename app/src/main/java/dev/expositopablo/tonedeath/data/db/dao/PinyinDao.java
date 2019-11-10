@@ -32,6 +32,9 @@ public interface PinyinDao {
     @Query("SELECT * from pinyin_table WHERE id = abs(random()) % (SELECT max(id) FROM pinyin_table) + 1")
     Pinyin getRandomPinyin();
 
+    @Query("SELECT COUNT(initial) FROM pinyin_table")
+    LiveData<Integer> getRowCount();
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pinyin pinyin);
 

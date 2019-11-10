@@ -11,12 +11,17 @@ import dev.expositopablo.tonedeath.data.commons.Pinyin;
 
 @Singleton
 public interface DataManager {
+
+
+    void initDB();
+
     void saveScore(int score);
     int getScore();
 
     LiveData<List<Pinyin>> getAllPinyin();
     LiveData<List<String>> getAllDistinctInitial();
     LiveData<List<String>> getAllDistinctFinal();
+    LiveData<Integer> getRowCount();
 
     LiveData<List<String>> getMainList(Boolean isInitialFirst);
     LiveData<List<Pinyin>> getDetailList(@NonNull String item, Boolean isInitialFirst);

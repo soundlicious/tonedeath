@@ -23,8 +23,8 @@ public class RepositoryModule {
 
     @Inject
     public RepositoryModule(ToneDeathApplication application) {
-        pinyinDatabase= PinyinDatabase.getDatabase(application);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(application);
+        pinyinDatabase= PinyinDatabase.getDatabase(application);
     }
 
     @Singleton

@@ -3,11 +3,6 @@ ext {
     configProperties.load(project.rootProject.file('config.properties').newDataInputStream())
 
     //region API KEY
-    adMobAppToken = configProperties['release_adMob']
-    adMobRecompenseAppToken = configProperties['release_adMobRecompense']
-    adMobBannerAppToken = configProperties['release_adMobBanner']
-    adMobRecompenseAppTokenTest = configProperties['debug_adMobRecompense']
-    adMobBannerAppTokenTest = configProperties['debug_adMobBanner']
     fabricApiKey = configProperties['release_fabricApiKey']
 
     keyAlias = configProperties['keyAlias']
@@ -20,7 +15,7 @@ ext {
     versionMajor = 1
     versionMinor = 0
     versionPatch = 0
-    versionBuild = 0
+    versionBuild = 1
 
     versionCode = versionMajor * 1000000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName = "${versionMajor}.${versionMinor}.${versionPatch}"
@@ -95,7 +90,6 @@ ext {
             [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-android-processor:$dagger"],
             [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-compiler:$dagger"],
             [configuration: "implementation", dependency: "com.google.firebase:firebase-core:$firebase"],
-            [configuration: "implementation", dependency: "com.google.android.gms:play-services-ads:$playService"],
             [configuration: "androidTestImplementation", dependency: "junit:junit:$junit"],
             [configuration: "testImplementation", dependency: "junit:junit:$junit"],
             [configuration: "androidTestImplementation", dependency: "com.android.support.test:runner:$runner"],

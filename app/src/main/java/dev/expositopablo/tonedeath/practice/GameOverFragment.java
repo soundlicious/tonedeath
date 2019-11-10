@@ -57,7 +57,6 @@ public class GameOverFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        createDialog();
         getScore();
     }
 
@@ -163,27 +162,6 @@ public class GameOverFragment extends Fragment {
             Animation goUp = AnimationUtils.loadAnimation(context, R.anim.go_up);
             goUp.setFillAfter(true);
             finalScore.startAnimation(goUp);
-        }
-    }
-    //endregion
-
-    //region Dialogs
-    private void createDialog() {
-        if (mListener.isAdLoaded()) {
-            SweetAlertDialog dialog = new SweetAlertDialog(getActivity(), SweetAlertDialog.CUSTOM_IMAGE_TYPE)
-                    .setCustomImage(R.drawable.phoenix)
-                    .setTitleText(getString(R.string.continuePlay))
-                    .setContentText(getString(R.string.getExtraLife))
-                    .setCancelText(getString(R.string.nothx))
-                    .setConfirmText(getString(R.string.confirmWatchAd))
-                    .setConfirmClickListener(sDialog -> {
-                        mListener.extraLife();
-                        sDialog.dismiss();
-                    })
-                    .showCancelButton(true)
-                    .setCancelClickListener(SweetAlertDialog::dismissWithAnimation);
-            dialog.setCancelable(false);
-            dialog.show();
         }
     }
     //endregion

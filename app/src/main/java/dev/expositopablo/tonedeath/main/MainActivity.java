@@ -12,10 +12,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import javax.inject.Inject;
 
@@ -36,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @BindView(R.id.textView_main_score)
     protected TextView score;
-    @BindView(R.id.adView_main_banner)
-    protected AdView mAdView;
     @BindView(R.id.button_main_learning)
     protected CardView learningButton;
     @BindView(R.id.button_main_practice)
@@ -57,14 +51,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         learningButton.setOnClickListener(this);
         practiceButton.setOnClickListener(this);
 
-        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
+        Integer rowCount = dataManager.getRowCount().getValue();
+        if (rowCount == null || rowCount == 0){
+            dataManager.initDB();
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         displayScore();
-//        loadAdBanner();
     }
 
     private void displayScore() {
@@ -73,17 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SpannableString span = new SpannableString(displayScoreText + " " + scoreNumber);
         span.setSpan(new StyleSpan(Typeface.BOLD), 0, displayScoreText.length(), 0);
         score.setText(span);
-    }
-
-    private void loadAdBanner() {
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                mAdView.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     @Override

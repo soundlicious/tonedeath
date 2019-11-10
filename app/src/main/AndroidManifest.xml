@@ -55,16 +55,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
         </activity>
-
-        <receiver android:name=".uselesswidget.UselessWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/useless_widget_info" />
-        </receiver>
     </application>
 
 </manifest>

@@ -5,6 +5,7 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -45,11 +46,14 @@ public abstract class PinyinDatabase extends RoomDatabase{
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDBAsync(INSTANCE).execute();
         }
     };
 
-    private static class PopulateDBAsync extends AsyncTask<Void, Void, Void> {
+    protected void populateDb(){
+        new PopulateDBAsync(INSTANCE).execute();
+    }
+
+    private static class PopulateDBAsync extends AsyncTask<Void, Void, Integer> {
         private final PinyinDao pinyinDao;
 
         PopulateDBAsync(PinyinDatabase db) {
@@ -57,7 +61,7 @@ public abstract class PinyinDatabase extends RoomDatabase{
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Integer doInBackground(Void... voids) {
             List<Pinyin> pinyins = new ArrayList<>();
 
             pinyins.add(new Pinyin("∅", "a", "a"));
@@ -477,7 +481,7 @@ public abstract class PinyinDatabase extends RoomDatabase{
                 Log.e("ADDING", pinyin.toString());
                 pinyinDao.insert(pinyin);
             }
-            return null;
+            return pinyins.size();
         }
     }
 }

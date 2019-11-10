@@ -13,12 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -28,7 +22,7 @@ import dev.expositopablo.tonedeath.BuildConfig;
 import dev.expositopablo.tonedeath.R;
 import dev.expositopablo.tonedeath.uselesswidget.UselessWidget;
 
-public class PracticeActivity extends AppCompatActivity implements PracticeCallback, RewardedVideoAdListener {
+public class PracticeActivity extends AppCompatActivity implements PracticeCallback {
 
     private static final String GAMEOVER = "gameOverFragment";
     private static final String PRACTICE = "PracticeFragment";
@@ -39,7 +33,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
     @BindView(R.id.frameLayout_practice)
     protected FrameLayout frameLayout;
 
-    private RewardedVideoAd mRewardedVideoAd;
     private PracticeViewModel viewModel;
 
     //region Lifecycle
@@ -59,37 +52,9 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
 
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(PracticeViewModel.class);
 
-//        MobileAds.initialize(this, BuildConfig.ADMOB_TOKEN);
-//
-//        // Use an activity context to get the rewarded video instance.
-//        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-//        mRewardedVideoAd.setRewardedVideoAdListener(this);
-//        loadRewardedVideoAd();
-
         if (savedInstanceState == null) {
             changeFragment(PRACTICE);
         }
-    }
-
-    @Override
-    public void onResume() {
-        if (mRewardedVideoAd != null)
-            mRewardedVideoAd.resume(this);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        if (mRewardedVideoAd != null)
-            mRewardedVideoAd.pause(this);
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        if (mRewardedVideoAd != null)
-            mRewardedVideoAd.destroy(this);
-        super.onDestroy();
     }
     //endregion
 
@@ -120,16 +85,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
     }
 
     @Override
-    public void extraLife() {
-        mRewardedVideoAd.show();
-    }
-
-    @Override
-    public boolean isAdLoaded() {
-        return (mRewardedVideoAd != null)? mRewardedVideoAd.isLoaded() :false;
-    }
-
-    @Override
     public void updateWidget() {
         Intent intent = new Intent(this, UselessWidget.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
@@ -147,46 +102,6 @@ public class PracticeActivity extends AppCompatActivity implements PracticeCallb
     @Override
     public void backToGame() {
         changeFragment(PRACTICE);
-    }
-    //endregion
-
-    //region Ad
-    private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd(BuildConfig.ADMOB_RECOMPENSE_TOKEN, new AdRequest.Builder().build());
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-    }
-
-    @Override
-    public void onRewardedVideoAdClosed() {
-        loadRewardedVideoAd();
-    }
-
-    @Override
-    public void onRewarded(RewardItem rewardItem) {
-        viewModel.addLife();
-    }
-
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int i) {
-    }
-
-    @Override
-    public void onRewardedVideoCompleted() {
     }
     //endregion
 }

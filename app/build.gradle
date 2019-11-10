@@ -21,16 +21,10 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.ext.adMobAppToken}"
-            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.ext.adMobRecompenseAppTokenTest}"
-            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.ext.adMobBannerAppTokenTest}"
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "ADMOB_TOKEN", "${rootProject.ext.adMobAppToken}"
-            buildConfigField "String", "ADMOB_RECOMPENSE_TOKEN", "${rootProject.ext.adMobRecompenseAppToken}"
-            resValue "string", "ADMOB_BANNER_TOKEN", "${rootProject.ext.adMobBannerAppToken}"
             signingConfig signingConfigs.release
         }
     }
