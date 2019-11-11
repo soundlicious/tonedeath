@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/initfinal_detail_list"
     android:name="dev.expositopablo.tonedeath.learning.InitFinalDetailFragment"
@@ -7,5 +7,5 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:context=".learning.InitFinalDetailActivity"
+    tools:context=".views.learning.InitFinalDetailActivity"
     tools:listitem="@layout/initfinal_list_content" />

@@ -23,79 +23,108 @@ ext {
 
     //region SDK && Tools
     minSdkVersion = 21
-    targetSdkVersion = 28
-    compileSdkVersion = 28
-    buildToolsVersion = '28.0.1'
+    targetSdkVersion = 29
+    compileSdkVersion = 29
+    buildToolsVersion = '29.0.1'
     //endregion
 
-    //region Support
-    supportLib = '28.0.0-rc01'
-    constraintLib = '1.1.2'
-    supportAnnotationExclude = {exclude group: 'com.android.support', module: 'support-annotations'}
-    //endregion
-
-    //region UI
-    materialValues = '1.1.1'
-    butterknife = '8.8.1'
-    sweetAlertDialog = 'v1.4.0'
-    //endregion
-
-    //region ArchComponent
-    roomVersion = '1.1.1'
-    archLifecycleVersion = '1.1.1'
-    //endregion
-
-    //region Dependency Injection
-    dagger = '2.16'
-    //endregion
-
-    //region GoogleServices
-    firebase = '16.0.1'
-    playService = '15.0.1'
-    //endregion
-
-    //region Testing && Debug
-    debugDB = '1.0.4'
-    timber = '4.7.1'
-    junit = '4.12'
-    runner = '1.0.2'
-    espresso = '3.0.2'
-    leakCanary = '1.5.4'
-    crashlytics = '2.9.4'
+    //region versions
+    rxJavaVersion = '2.2.10'
+    rxKotlinVersion = '2.4.0-RC3'
+    rxAndroidVersion = '2.1.1'
+    rxBindingVersion = '2.2.0'
+    autoDisposeVersion = '1.3.0'
+    archExtensionVersion = '2.0.0'
+    archRuntimeVersion = '2.0.0'
+    archCompilerVersion = '2.0.0'
+    archCoreTesting = '2.0.0'
+    constraintLayoutVersion = '1.1.3'
+    supportLibraryVersion = '1.0.0'
+    constraintLayoutVersion = '1.1.3'
+    materialVersion = '1.1.0-alpha08'
+    timberVersion = '4.7.1'
+    koin_version = '2.0.1'
+    jUnitVersion = '4.12'
+    exoPlayerVersion = '2.10.3'
+    retrofit = '2.6.1'
+    threetenabp = '1.2.1'
+    koin = "2.0.1"
+    gson = '2.8.5'
+    okhttp = '4.1.0'
+    mockito = '2.1.0'
+    assertJ = '2.9.1'
+    epoxy = '3.7.0'
+    glide = '4.9.0'
+    firebase = '19.0.0'
+    pandora = '1.1'
+    coreKTX = '1.2.0-alpha03'
+    ratingBar = '1.4.3'
+    lottie = '3.0.7'
+    viewpager = '1.0.0-beta04'
+    phoneNumberUtils = '8.4.3'
+    flexBox = "1.1.1"
+    materialValues = "1.1.1"
+    roomVersion = "2.2.1"
     //endregion
 
     //region dependencies
     dependencies = [
-            [configuration: "implementation", dependency: "com.jakewharton.timber:timber:$timber"],
-            [configuration: "implementation", dependency: "com.android.support:support-v4:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:customtabs:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:support-v13:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:appcompat-v7:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:palette-v7:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:recyclerview-v7:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:cardview-v7:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support:design:$supportLib"],
-            [configuration: "implementation", dependency: "com.android.support.constraint:constraint-layout:$constraintLib"],
             [configuration: "implementation", dependency: "blue.aodev:material-values:$materialValues"],
-            [configuration: "implementation", dependency: "com.jakewharton:butterknife:$butterknife"],
-            [configuration: "annotationProcessor", dependency: "com.jakewharton:butterknife-compiler:$butterknife"],
-            [configuration: "implementation", dependency: "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"],
-            [configuration: "implementation", dependency: "android.arch.persistence.room:runtime:$roomVersion"],
-            [configuration: "annotationProcessor", dependency: "android.arch.persistence.room:compiler:$roomVersion"],
-            [configuration: "androidTestImplementation", dependency: "android.arch.persistence.room:testing:$roomVersion"],
-            [configuration: "implementation", dependency: "android.arch.lifecycle:extensions:$archLifecycleVersion"],
-            [configuration: "annotationProcessor", dependency: "android.arch.lifecycle:compiler:$archLifecycleVersion"],
-            [configuration: "implementation", dependency: "com.google.dagger:dagger-android:$dagger"],
-            [configuration: "implementation", dependency: "com.google.dagger:dagger-android-support:$dagger"],
-            [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-android-processor:$dagger"],
-            [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-compiler:$dagger"],
-            [configuration: "implementation", dependency: "com.google.firebase:firebase-core:$firebase"],
-            [configuration: "androidTestImplementation", dependency: "junit:junit:$junit"],
-            [configuration: "testImplementation", dependency: "junit:junit:$junit"],
-            [configuration: "androidTestImplementation", dependency: "com.android.support.test:runner:$runner"],
-            [configuration: "androidTestImplementation", dependency: "com.android.support.test.espresso:espresso-core:$espresso", options: supportAnnotationExclude],
-            [configuration: "debugImplementation", dependency: "com.amitshekhar.android:debug-db:$debugDB"],
-            [configuration: "implementation", dependency: "com.crashlytics.sdk.android:crashlytics:$crashlytics", options: {transitive true}],
+            [configuration: "implementation", dependency: "com.google.android.material:material:${materialVersion}"],
+            [configuration: "implementation", dependency: "androidx.constraintlayout:constraintlayout:${constraintLayoutVersion}"],
+
+            [configuration: "implementation", dependency: "androidx.core:core-ktx:$coreKTX"],
+
+            [configuration: "implementation", dependency: "androidx.appcompat:appcompat:${supportLibraryVersion}"],
+            [configuration: "implementation", dependency: "androidx.legacy:legacy-support-v4:${supportLibraryVersion}"],
+
+            [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-runtime:${archRuntimeVersion}"],
+            [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-extensions:${archExtensionVersion}"],
+            [configuration: "kapt", dependency: "androidx.lifecycle:lifecycle-compiler:${archCompilerVersion}"],
+
+            [configuration: "implementation", dependency: "io.reactivex.rxjava2:rxkotlin:${rxKotlinVersion}"],
+            [configuration: "implementation", dependency: "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}"],
+
+
+            [configuration: "implementation", dependency: "org.koin:koin-android:${koin}"],
+            [configuration: "implementation", dependency: "org.koin:koin-android-scope:${koin}"],
+            [configuration: "implementation", dependency: "org.koin:koin-android-viewmodel:${koin}"],
+
+            [configuration: "implementation", dependency: "androidx.room:room-runtime:${roomVersion}"],
+            [configuration: "implementation", dependency: "androidx.room:room-ktx:${roomVersion}"],
+            [configuration: "kapt", dependency: "androidx.room:room-compiler:${roomVersion}"],
+            [configuration: "implementation", dependency: "androidx.room:room-rxjava2:${roomVersion}"]
+
+
+//            [configuration: "implementation", dependency: "com.jakewharton.timber:timber:$timber"],
+//            [configuration: "implementation", dependency: "com.android.support:support-v4:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:customtabs:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:support-v13:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:appcompat-v7:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:palette-v7:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:recyclerview-v7:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:cardview-v7:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support:design:$supportLib"],
+//            [configuration: "implementation", dependency: "com.android.support.constraint:constraint-layout:$constraintLib"],
+//            [configuration: "implementation", dependency: "com.jakewharton:butterknife:$butterknife"],
+//            [configuration: "annotationProcessor", dependency: "com.jakewharton:butterknife-compiler:$butterknife"],
+//            [configuration: "implementation", dependency: "com.github.thomper:sweet-alert-dialog:$sweetAlertDialog"],
+//            [configuration: "implementation", dependency: "android.arch.persistence.room:runtime:$roomVersion"],
+//            [configuration: "annotationProcessor", dependency: "android.arch.persistence.room:compiler:$roomVersion"],
+//            [configuration: "androidTestImplementation", dependency: "android.arch.persistence.room:testing:$roomVersion"],
+//            [configuration: "implementation", dependency: "android.arch.lifecycle:extensions:$archLifecycleVersion"],
+//            [configuration: "annotationProcessor", dependency: "android.arch.lifecycle:compiler:$archLifecycleVersion"],
+//            [configuration: "implementation", dependency: "com.google.dagger:dagger-android:$dagger"],
+//            [configuration: "implementation", dependency: "com.google.dagger:dagger-android-support:$dagger"],
+//            [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-android-processor:$dagger"],
+//            [configuration: "annotationProcessor", dependency: "com.google.dagger:dagger-compiler:$dagger"],
+//            [configuration: "implementation", dependency: "com.google.firebase:firebase-core:$firebase"],
+//            [configuration: "androidTestImplementation", dependency: "junit:junit:$junit"],
+//            [configuration: "testImplementation", dependency: "junit:junit:$junit"],
+//            [configuration: "androidTestImplementation", dependency: "com.android.support.test:runner:$runner"],
+//            [configuration: "androidTestImplementation", dependency: "com.android.support.test.espresso:espresso-core:$espresso", options: supportAnnotationExclude],
+//            [configuration: "debugImplementation", dependency: "com.amitshekhar.android:debug-db:$debugDB"],
+//            [configuration: "implementation", dependency: "com.crashlytics.sdk.android:crashlytics:$crashlytics", options: {transitive true}],
     ]
     //endregion
 }

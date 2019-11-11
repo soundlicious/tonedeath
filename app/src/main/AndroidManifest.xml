@@ -12,49 +12,52 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/MintTheme"
-        tools:replace="android:icon">
-        <activity android:name=".main.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        tools:replace="android:icon"
+        tools:ignore="GoogleAppIndexingWarning">
+                <activity android:name=".views.splashscreen.SplashScreenActivity">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+        <activity android:name=".views.main.MainActivity">
         </activity>
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="${fabric_api_key}" />
+<!--        <meta-data-->
+<!--            android:name="io.fabric.ApiKey"-->
+<!--            android:value="${fabric_api_key}" />-->
 
-        <activity android:name=".practice.PracticeActivity"
-            android:parentActivityName=".main.MainActivity">
+<!--        <activity android:name=".practice.PracticeActivity"-->
+<!--            android:parentActivityName=".main.MainActivity">-->
 
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".learning.InitFinalListActivity"
-            android:label="@string/title_initfinal_list"
-            android:parentActivityName=".main.MainActivity"
-            android:theme="@style/MintTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".learning.InitFinalDetailActivity"
-            android:label="@string/title_initfinal_detail"
-            android:parentActivityName=".learning.InitFinalListActivity"
-            android:theme="@style/MintTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
-        </activity>
-        <activity android:name=".learning.ListeningActivity"
-            android:parentActivityName=".learning.InitFinalListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
-        </activity>
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value="dev.expositopablo.tonedeath.views.main.MainActivity" />-->
+<!--        </activity>-->
+<!--        <activity-->
+<!--            android:name=".learning.InitFinalListActivity"-->
+<!--            android:label="@string/title_initfinal_list"-->
+<!--            android:parentActivityName=".main.MainActivity"-->
+<!--            android:theme="@style/MintTheme.NoActionBar">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value="dev.expositopablo.tonedeath.views.main.MainActivity" />-->
+<!--        </activity>-->
+<!--        <activity-->
+<!--            android:name=".learning.InitFinalDetailActivity"-->
+<!--            android:label="@string/title_initfinal_detail"-->
+<!--            android:parentActivityName=".learning.InitFinalListActivity"-->
+<!--            android:theme="@style/MintTheme.NoActionBar">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value="dev.expositopablo.tonedeath.views.learning.InitFinalListActivity" />-->
+<!--        </activity>-->
+<!--        <activity android:name=".learning.ListeningActivity"-->
+<!--            android:parentActivityName=".learning.InitFinalListActivity">-->
+<!--            <meta-data-->
+<!--                android:name="android.support.PARENT_ACTIVITY"-->
+<!--                android:value="dev.expositopablo.tonedeath.views.learning.InitFinalListActivity" />-->
+<!--        </activity>-->
     </application>
 
 </manifest>
