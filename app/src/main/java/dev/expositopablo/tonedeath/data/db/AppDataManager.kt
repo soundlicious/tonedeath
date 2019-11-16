@@ -1,11 +1,11 @@
 package dev.expositopablo.tonedeath.data.db
 
-import androidx.lifecycle.LiveData
 import android.content.SharedPreferences
 
 import dev.expositopablo.tonedeath.data.commons.Constants
 import dev.expositopablo.tonedeath.data.commons.Pinyin
 import dev.expositopablo.tonedeath.data.db.dao.PinyinDao
+import io.reactivex.Single
 
 class AppDataManager constructor(private val db: PinyinDatabase, private val pref: SharedPreferences) : DataManager {
     private val pinyinDao: PinyinDao = db.pinyinDao()
@@ -13,19 +13,19 @@ class AppDataManager constructor(private val db: PinyinDatabase, private val pre
     override val score: Int
         get() = pref.getInt(Constants.SCORE, 0)
 
-    override val allPinyin: LiveData<List<Pinyin>>
+    override val allPinyin: Single<List<Pinyin>>
         get() = pinyinDao.allPinyin
 
-    override val allDistinctInitial: LiveData<List<String>>
+    override val allDistinctInitial: Single<List<String>>
         get() = pinyinDao.allDistinctInitial
 
-    override val allDistinctFinal: LiveData<List<String>>
+    override val allDistinctFinal: Single<List<String>>
         get() = pinyinDao.allDistinctFinal
 
-    override val rowCount: LiveData<Int>
+    override val rowCount: Single<Int>
         get() = pinyinDao.rowCount
 
-    override val randomPinyin: Pinyin
+    override val randomPinyin: Single<Pinyin>
         get() = pinyinDao.randomPinyin
 
     override fun initDB() {
@@ -38,25 +38,25 @@ class AppDataManager constructor(private val db: PinyinDatabase, private val pre
             pref.edit().putInt(Constants.SCORE, score).apply()
     }
 
-    override fun getMainList(isInitialFirst: Boolean): LiveData<List<String>> {
+    override fun getMainList(isInitialFirst: Boolean): Single<List<String>> {
         return if (isInitialFirst)
             pinyinDao.allDistinctInitial
         else
             pinyinDao.allDistinctFinal
     }
 
-    override fun getDetailList(item: String, isInitialFirst: Boolean): LiveData<List<Pinyin>> {
+    override fun getDetailList(item: String, isInitialFirst: Boolean): Single<List<Pinyin>> {
         return if (isInitialFirst)
             pinyinDao.getAllPinyinByInitial(item)
         else
             pinyinDao.getAllPinyinByFinal(item)
     }
 
-    override fun getAllPinyinByInitial(pInitial: String): LiveData<List<Pinyin>> {
+    override fun getAllPinyinByInitial(pInitial: String): Single<List<Pinyin>> {
         return pinyinDao.getAllPinyinByInitial(pInitial)
     }
 
-    override fun getAllPinyinByFinal(pFinal: String): LiveData<List<Pinyin>> {
+    override fun getAllPinyinByFinal(pFinal: String): Single<List<Pinyin>> {
         return pinyinDao.getAllPinyinByFinal(pFinal)
     }
 }

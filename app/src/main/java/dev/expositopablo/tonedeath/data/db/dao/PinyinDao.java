@@ -1,6 +1,5 @@
 package dev.expositopablo.tonedeath.data.db.dao;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -10,30 +9,31 @@ import androidx.annotation.NonNull;
 import java.util.List;
 
 import dev.expositopablo.tonedeath.data.commons.Pinyin;
+import io.reactivex.Single;
 
 @Dao
 public interface PinyinDao {
 
     @Query("SELECT * from pinyin_table")
-    LiveData<List<Pinyin>> getAllPinyin();
+    Single<List<Pinyin>> getAllPinyin();
 
     @Query("SELECT DISTINCT initial from pinyin_table ORDER BY final ASC")
-    LiveData<List<String>> getAllDistinctInitial();
+    Single<List<String>> getAllDistinctInitial();
 
     @Query("SELECT DISTINCT final from pinyin_table ORDER BY final ASC")
-    LiveData<List<String>> getAllDistinctFinal();
+    Single<List<String>> getAllDistinctFinal();
 
     @Query("SELECT * from pinyin_table WHERE initial = :pInitial ORDER BY initial")
-    LiveData<List<Pinyin>> getAllPinyinByInitial(@NonNull String pInitial);
+    Single<List<Pinyin>> getAllPinyinByInitial(@NonNull String pInitial);
 
     @Query("SELECT * from pinyin_table WHERE final = :pFinal ORDER BY final")
-    LiveData<List<Pinyin>> getAllPinyinByFinal(@NonNull String pFinal);
+    Single<List<Pinyin>> getAllPinyinByFinal(@NonNull String pFinal);
 
     @Query("SELECT * from pinyin_table WHERE id = abs(random()) % (SELECT max(id) FROM pinyin_table) + 1")
-    Pinyin getRandomPinyin();
+    Single<Pinyin> getRandomPinyin();
 
     @Query("SELECT COUNT(initial) FROM pinyin_table")
-    LiveData<Integer> getRowCount();
+    Single<Integer> getRowCount();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Pinyin pinyin);

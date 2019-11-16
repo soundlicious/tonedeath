@@ -11,6 +11,7 @@ import dev.expositopablo.tonedeath.data.db.DataManager
 import dev.expositopablo.tonedeath.views.main.MainActivity
 import dev.expositopablo.tonedeath.views.main.MainActivityIntent
 import org.koin.android.ext.android.inject
+import org.koin.core.context.loadKoinModules
 import kotlinx.android.synthetic.main.activity_splashscreen.michigan_logo as logo
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -21,15 +22,10 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadKoinModules(splashScreenModule)
         setContentView(R.layout.activity_splashscreen)
         hideSystemUI()
         nextAnimation()
-
-
-        val rowCount = dataManager.rowCount.value
-        if (rowCount == null || rowCount == 0) {
-            dataManager.initDB()
-        }
     }
 
     private fun hideSystemUI() {

@@ -1,26 +1,25 @@
 package dev.expositopablo.tonedeath.data.db
 
-import androidx.lifecycle.LiveData
-
 import dev.expositopablo.tonedeath.data.commons.Pinyin
+import io.reactivex.Single
 
 interface DataManager {
     val score: Int
 
-    val allPinyin: LiveData<List<Pinyin>>
-    val allDistinctInitial: LiveData<List<String>>
-    val allDistinctFinal: LiveData<List<String>>
-    val rowCount: LiveData<Int>
-    val randomPinyin: Pinyin
+    val allPinyin: Single<List<Pinyin>>
+    val allDistinctInitial: Single<List<String>>
+    val allDistinctFinal: Single<List<String>>
+    val rowCount: Single<Int>
+    val randomPinyin: Single<Pinyin>
 
 
     fun initDB()
 
     fun saveScore(score: Int)
 
-    fun getMainList(isInitialFirst: Boolean): LiveData<List<String>>
-    fun getDetailList(item: String, isInitialFirst: Boolean): LiveData<List<Pinyin>>
+    fun getMainList(isInitialFirst: Boolean): Single<List<String>>
+    fun getDetailList(item: String, isInitialFirst: Boolean): Single<List<Pinyin>>
 
-    fun getAllPinyinByInitial(pInitial: String): LiveData<List<Pinyin>>
-    fun getAllPinyinByFinal(pFinal: String): LiveData<List<Pinyin>>
+    fun getAllPinyinByInitial(pInitial: String): Single<List<Pinyin>>
+    fun getAllPinyinByFinal(pFinal: String): Single<List<Pinyin>>
 }

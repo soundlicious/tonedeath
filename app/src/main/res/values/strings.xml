@@ -33,4 +33,5 @@
     <string name="initial">Initials</string>
     <string name="finals">Finals</string>
     <string name="switchList">switch</string>
+    <string name="default_error">An error occured</string>
 </resources>
