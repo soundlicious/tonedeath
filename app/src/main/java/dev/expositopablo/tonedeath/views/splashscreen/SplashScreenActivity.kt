@@ -10,6 +10,8 @@ import dev.expositopablo.tonedeath.R
 import dev.expositopablo.tonedeath.data.db.DataManager
 import dev.expositopablo.tonedeath.views.main.MainActivity
 import dev.expositopablo.tonedeath.views.main.MainActivityIntent
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import kotlinx.android.synthetic.main.activity_splashscreen.michigan_logo as logo

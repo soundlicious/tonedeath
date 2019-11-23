@@ -12,9 +12,6 @@ interface DataManager {
     val rowCount: Single<Int>
     val randomPinyin: Single<Pinyin>
 
-
-    fun initDB()
-
     fun saveScore(score: Int)
 
     fun getMainList(isInitialFirst: Boolean): Single<List<String>>

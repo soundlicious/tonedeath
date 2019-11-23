@@ -28,10 +28,6 @@ class AppDataManager constructor(private val db: PinyinDatabase, private val pre
     override val randomPinyin: Single<Pinyin>
         get() = pinyinDao.randomPinyin
 
-    override fun initDB() {
-        db.populateDb()
-    }
-
     override fun saveScore(score: Int) {
         val best = pref.getInt(Constants.SCORE, 0)
         if (score > best)

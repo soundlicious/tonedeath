@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(view: View) {
         val bundleTransition = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
         when (view.id) {
-//            R.id.button_main_learning -> startActivity(new Intent(this, InitFinalListActivity.class), bundleTransition)
-//            R.id.button_main_practice -> startActivity(new Intent(this, PracticeActivity.class), bundleTransition)
+//            R.id.button_main_learning -> startActivity(Intent(this@MainActivity, InitFinal), bundleTransition)
+//            R.id.button_main_practice -> startActivity(Intent(this, PracticeActivity.class), bundleTransition)
         }
     }
 
