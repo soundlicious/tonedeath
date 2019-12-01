@@ -3,28 +3,17 @@ package dev.expositopablo.tonedeath.views.splashscreen
 import android.app.ActivityOptions
 import android.os.Bundle
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import dev.expositopablo.tonedeath.R
-import dev.expositopablo.tonedeath.data.db.DataManager
-import dev.expositopablo.tonedeath.views.main.MainActivity
 import dev.expositopablo.tonedeath.views.main.MainActivityIntent
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import org.koin.android.ext.android.inject
-import org.koin.core.context.loadKoinModules
 import kotlinx.android.synthetic.main.activity_splashscreen.michigan_logo as logo
 
 class SplashScreenActivity : AppCompatActivity() {
-
-    val dataManager: DataManager by inject()
 
     private var i = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        loadKoinModules(splashScreenModule)
         setContentView(R.layout.activity_splashscreen)
         hideSystemUI()
         nextAnimation()
@@ -39,7 +28,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun nextAnimation() {
         i++
-        when  {
+        when {
             i > 6 -> rotateAndScaleUp()
             i % 2 != 0 -> scaleDown()
             else -> scaleUp()
@@ -48,20 +37,22 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     private fun scaleDown() {
-        logo.animate()
-                .scaleX(0.99f).scaleY(0.99f)//scale to quarter(half x,half y)
-                .alpha(0.99f) // make it less visible
-                .setDuration(1000) // all take 1 seconds
+        logo
+                .animate()
+                .scaleX(0.99f).scaleY(0.99f)
+                .alpha(0.99f)
+                .setDuration(1000)
                 .withEndAction {
                     nextAnimation()
                 }
     }
 
     private fun scaleUp() {
-        logo.animate()
-                .scaleX(1f).scaleY(1f)//scale to quarter(half x,half y)
-                .alpha(1f) // make it less visible
-                .setDuration(1000) // all take 1 seconds
+        logo
+                .animate()
+                .scaleX(1f).scaleY(1f)
+                .alpha(1f)
+                .setDuration(1000)
                 .withEndAction {
                     nextAnimation()
                 }
@@ -69,9 +60,9 @@ class SplashScreenActivity : AppCompatActivity() {
 
     private fun rotateAndScaleUp() {
         logo.animate()
-                .scaleX(30f).scaleY(30f)//scale to quarter(half x,half y)
+                .scaleX(30f).scaleY(30f)
                 .rotationBy(360f)
-                .setDuration(2000) // all take 1 seconds
+                .setDuration(2000)
                 .withEndAction {
                     val bundleTransition = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
                     startActivity(MainActivityIntent(), bundleTransition)

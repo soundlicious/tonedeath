@@ -7,6 +7,7 @@ import dev.expositopablo.tonedeath.data.commons.State
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.observers.DisposableObserver
+import io.reactivex.observers.DisposableSingleObserver
 
 abstract class BaseViewModel : ViewModel() {
     protected val mutableState = MutableLiveData<State>()
@@ -37,5 +38,15 @@ abstract class BaseViewModel : ViewModel() {
             mutableState.postValue(State.ErrorMsg())
         }
 
+    }
+
+    inner class BaseDisposableSingleObserver : DisposableSingleObserver<State>() {
+        override fun onSuccess(t: State) {
+            mutableState.postValue(t)
+        }
+
+        override fun onError(e: Throwable) {
+            mutableState.postValue(State.ErrorMsg())
+        }
     }
 }

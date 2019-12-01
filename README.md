@@ -62,9 +62,9 @@ Dependency          |  Description
 
 - [x] Record and add audio files to the project.
 - [ ] Convert to Kotlin
-- [ ] Replace Gradle with Koin
+- [ ] Replace Dagger with Koin
 - [ ] Add About page and quote licences
-- [ ] Change Icon
+- [X] Change Icon
 - [ ] Better Architecture and use of LiveData
 - [ ] Unit Tests
 

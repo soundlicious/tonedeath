@@ -23,17 +23,17 @@
                 </activity>
         <activity android:name=".views.main.MainActivity">
         </activity>
-<!--        <meta-data-->
-<!--            android:name="io.fabric.ApiKey"-->
-<!--            android:value="${fabric_api_key}" />-->
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="${fabric_api_key}" />
 
-<!--        <activity android:name=".practice.PracticeActivity"-->
-<!--            android:parentActivityName=".main.MainActivity">-->
+        <activity android:name=".views.practice.PracticeActivity"
+            android:parentActivityName=".views.main.MainActivity">
 
-<!--            <meta-data-->
-<!--                android:name="android.support.PARENT_ACTIVITY"-->
-<!--                android:value="dev.expositopablo.tonedeath.views.main.MainActivity" />-->
-<!--        </activity>-->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="dev.expositopablo.tonedeath.views.main.MainActivity" />
+        </activity>
 <!--        <activity-->
 <!--            android:name=".learning.InitFinalListActivity"-->
 <!--            android:label="@string/title_initfinal_list"-->

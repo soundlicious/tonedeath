@@ -4,7 +4,7 @@ import dev.expositopablo.tonedeath.data.commons.Pinyin
 import io.reactivex.Single
 
 interface DataManager {
-    val score: Int
+    val score: Single<Int>
 
     val allPinyin: Single<List<Pinyin>>
     val allDistinctInitial: Single<List<String>>
