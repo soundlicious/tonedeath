@@ -1,5 +1,8 @@
 package dev.expositopablo.tonedeath.data.commons
 
+import android.content.Context
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -34,5 +37,26 @@ data class Pinyin(
 
     override fun hashCode(): Int {
         return Objects.hash(this.toString())
+    }
+}
+
+@Parcelize
+data class PinyinDTO(
+        val pinyin: Pinyin,
+        val tone: String,
+        val voice: String
+): Parcelable {
+    fun getFileName(): String {
+        return "${pinyin}_${tone}_$voice"
+    }
+}
+
+fun PinyinDTO.prepareSoundMediaPlayer(context: Context?, onComplete: (() -> Unit)? = null) : MediaPlayer?{
+    return context?.let {
+        val resID = it.resources.getIdentifier(this.getFileName(), "raw", it.packageName)
+        MediaPlayer.create(it, resID).apply {
+            setOnCompletionListener { onComplete?.invoke() }
+            setAudioStreamType(AudioManager.STREAM_MUSIC)
+        }
     }
 }

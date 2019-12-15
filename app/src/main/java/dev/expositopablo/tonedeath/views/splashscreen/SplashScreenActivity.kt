@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import dev.expositopablo.tonedeath.R
-import dev.expositopablo.tonedeath.views.main.MainActivityIntent
+import dev.expositopablo.tonedeath.views.main.mainActivityIntent
 import kotlinx.android.synthetic.main.activity_splashscreen.michigan_logo as logo
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -65,7 +65,8 @@ class SplashScreenActivity : AppCompatActivity() {
                 .setDuration(2000)
                 .withEndAction {
                     val bundleTransition = ActivityOptions.makeSceneTransitionAnimation(this).toBundle()
-                    startActivity(MainActivityIntent(), bundleTransition)
+                    startActivity(mainActivityIntent(), bundleTransition)
+                    finish()
                 }
     }
 }

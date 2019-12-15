@@ -15,8 +15,11 @@ import androidx.lifecycle.Observer
 import dev.expositopablo.tonedeath.R
 import dev.expositopablo.tonedeath.androidutils.ImagesUtils
 import dev.expositopablo.tonedeath.data.commons.Constants
+import dev.expositopablo.tonedeath.data.commons.PinyinDTO
 import dev.expositopablo.tonedeath.data.commons.State
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import dev.expositopablo.tonedeath.data.commons.prepareSoundMediaPlayer
+import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
 
 import kotlinx.android.synthetic.main.fragment_practice.imageView_practice_play as play
 import kotlinx.android.synthetic.main.fragment_practice.button_practice_tone1 as tone1
@@ -28,14 +31,17 @@ import kotlinx.android.synthetic.main.fragment_practice.textView_practice_score 
 
 class PracticeFragment : Fragment(R.layout.fragment_practice) {
 
-    private val viewModel by sharedViewModel<PracticeViewModel>()
+    private val viewModel by viewModel<PracticeViewModel>()
 
     private var mediaPlayer: MediaPlayer? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListeners()
-
+        loadKoinModules(practiceModule)
+        context?.let {
+            viewModel.callback = it as PracticeCallback
+        }
         viewModel.scoreState.observe(viewLifecycleOwner, Observer { value ->
             context?.let {
                 val displayScoreText = it.getString(R.string.current_score)
@@ -60,9 +66,7 @@ class PracticeFragment : Fragment(R.layout.fragment_practice) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is PracticeCallback) {
-            viewModel.callback = context
-        } else {
+        if (context !is PracticeCallback) {
             throw RuntimeException("$context must implement PracticeCallback")
         }
     }
@@ -100,15 +104,18 @@ class PracticeFragment : Fragment(R.layout.fragment_practice) {
     //region Audio
     private fun playSound(dto: PinyinDTO) {
         disableClick()
-        context?.let {
-            println(dto.getFileName())
-            val resID = resources.getIdentifier(dto.getFileName(), "raw", it.packageName)
-            mediaPlayer = MediaPlayer.create(it, resID).apply {
-                setOnCompletionListener { enableClick() }
-                setAudioStreamType(AudioManager.STREAM_MUSIC)
-            }
-            mediaPlayer?.start()
-        }
+        mediaPlayer?.release()
+        mediaPlayer = dto.prepareSoundMediaPlayer(context) { enableClick() }
+        mediaPlayer?.start()
+//        context?.let {
+//            println(dto.getFileName())
+//            val resID = resources.getIdentifier(dto.getFileName(), "raw", it.packageName)
+//            mediaPlayer = MediaPlayer.create(it, resID).apply {
+//                setOnCompletionListener { enableClick() }
+//                setAudioStreamType(AudioManager.STREAM_MUSIC)
+//            }
+//            mediaPlayer?.start()
+//        }
     }
     //endregion
 

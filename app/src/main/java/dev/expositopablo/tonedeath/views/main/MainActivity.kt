@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_main.button_main_learning as lear
 import kotlinx.android.synthetic.main.activity_main.button_main_practice as practiceButton
 import kotlinx.android.synthetic.main.activity_main.textView_main_score as score
 
-fun Context.MainActivityIntent() = Intent(this, MainActivity::class.java)
+fun Context.mainActivityIntent() = Intent(this, MainActivity::class.java)
 
 class MainActivity : BaseActivity() {
 
@@ -44,6 +44,10 @@ class MainActivity : BaseActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getScore()
+    }
     override fun onStop() {
         unloadKoinModules(mainModule)
         super.onStop()

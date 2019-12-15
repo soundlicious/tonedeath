@@ -1,28 +1,22 @@
 package dev.expositopablo.tonedeath.views.practice
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dev.expositopablo.tonedeath.androidutils.BaseViewModel
+import dev.expositopablo.tonedeath.androidutils.ext.AndroidSchedulerProvider
+import dev.expositopablo.tonedeath.androidutils.ext.SchedulerProvider
+import dev.expositopablo.tonedeath.androidutils.ext.with
 import dev.expositopablo.tonedeath.data.commons.Constants
 import dev.expositopablo.tonedeath.data.commons.Pinyin
+import dev.expositopablo.tonedeath.data.commons.PinyinDTO
 import dev.expositopablo.tonedeath.data.commons.State
 import dev.expositopablo.tonedeath.data.db.DataManager
 import io.reactivex.observers.DisposableMaybeObserver
 import io.reactivex.observers.DisposableObserver
-import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.parcel.Parcelize
 import java.util.*
-import java.util.concurrent.Executors
-
-data class PinyinDTO(
-        val pinyin: Pinyin,
-        val tone: String,
-        val voice: String
-) {
-    fun getFileName(): String {
-        return "${pinyin}_${tone}_$voice"
-    }
-}
 
 class PracticeViewModel(
         private val datamanager: DataManager
@@ -37,9 +31,6 @@ class PracticeViewModel(
     private val mutableScoreState = MutableLiveData<Int>().apply { postValue(0) }
     val scoreState: LiveData<Int>
         get() = mutableScoreState
-    private val mutableGameOverState = MutableLiveData<Pair<PinyinDTO, String>>()
-    val gameOverState: LiveData<Pair<PinyinDTO, String>>
-        get() = mutableGameOverState
 
     var callback: PracticeCallback? = null
 
@@ -53,7 +44,13 @@ class PracticeViewModel(
     private fun disposeScore() {
         dispose(
                 scoreUpdate
-                        .reduce { acc: Int, x: Int -> acc + x }
+                        .with(AndroidSchedulerProvider())
+                        .map {
+                            val newScore = score + 1
+                            datamanager.saveScore(newScore)
+                            score = newScore
+                            newScore
+                        }
                         .onErrorReturn { 0 }
                         .subscribeWith(ScoreObserver())
         )
@@ -86,11 +83,11 @@ class PracticeViewModel(
         dispose(
                 answer.subscribe {
                     if (currentPiyin?.tone == it) {
-                        scoreUpdate.onNext(1)
+                        scoreUpdate.onNext(score)
                         loadPinyin.onNext(Unit)
                     } else {
                         datamanager.saveScore(score)
-                        callback?.gameOver()
+                        callback?.gameOver(currentPiyin!!, currentPiyin!!.copy(tone = it), score)
                     }
                 }
         )
@@ -104,8 +101,8 @@ class PracticeViewModel(
         callback = null
     }
 
-    private inner class ScoreObserver : DisposableMaybeObserver<Int>() {
-        override fun onSuccess(t: Int) {
+    private inner class ScoreObserver : DisposableObserver<Int>() {
+        override fun onNext(t: Int) {
             score = t
             mutableScoreState.postValue(t)
         }

@@ -2,7 +2,6 @@ package dev.expositopablo.tonedeath.data.commons
 
 import android.content.Context
 import dev.expositopablo.tonedeath.R
-import dev.expositopablo.tonedeath.views.practice.PinyinDTO
 
 sealed class State {
     abstract class Loading: State()
