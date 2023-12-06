@@ -10,63 +10,23 @@
 ## Compatibilities
 
 * Android 21 or higher
-* Works on mobile and tablet
+* Works on mobile, tablet and foldable
 
-## How to build
+## Prerequisite
 
-* Edit **config-template.properties** at the root of the project with you own [AdMob](https://firebase.google.com/docs/admob/android/quick-start) and [Craslytics](https://firebase.google.com/docs/crashlytics/get-started) credentials.
+### Generate tones resources
+Execute the bash script in utils directory. (this might take long, there is almost 10000 aac file to create)
 ```
-release_adMob="ca-app-pub-AdMobKey"
-release_adMobRecompense="ca-app-pub-AdMobRewardKey"
-release_adMobBanner="ca-app-pub-AdMobBanner"
-release_fabricApiKey="FabricApiKey"
+./utils/generate_tones.sh
 ```
-
-* Rename  **config-template.properties** to **config.properties**.
-* Edit **keystore-template.properties** at the root of the project with your own keystore's credentials
-```
-keyAlias=yourKeyAlias
-keyPassword=yourKeyPassword
-storeFile=C:/your/directory/ForKeyStore.jks
-storePassword=yourStorePassword
-```
-* Rename  **keystore-template.properties** to **keystore.properties**.
-* Build Debug or Release!
-
-## Screenshots
-
-Main Menu            |  Learning : Main List |  Learning : Detail List
-:-------------------------:|:-------------------------:|:-------------------------:
-![](readme-res/MainMenu-Mobile.png)  |  ![](readme-res/Learning-MainList-Mobile.png) |  ![](readme-res/Learning_DetailList-Mobile.png)
-
-Learning : Listening             |  Practice |  Game Over
-:-------------------------:|:-------------------------:|:-------------------------:
-![](readme-res/Learning-Listening-Mobile.png)  |  ![](readme-res/Practice-Mobile.gif) |  ![](readme-res/GameOver-Mobile.gif)
-
-## Dependencies
-
-Dependency          |  Description
-:-------------------------:|:-------------------------:
-[Constraint Layout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout) | ViewGroup which allows you to position and size widgets in a flexible way
-[Material Values](https://github.com/AoDevBlue/MaterialValues) | An Android library for material design values
-[Butterknife](https://jakewharton.github.io/butterknife/) | Field and method binding for Android views
-[SweetAlertDialog](https://github.com/thomper/sweet-alert-dialog) | Beautiful and clever alert dialog
-[Room](https://developer.android.com/topic/libraries/architecture/room) |  Abstraction layer over SQLite
-[Dagger 2](https://google.github.io/dagger/) | Dependencies injection
-[AdMob](https://www.google.com/admob/) | Mobile app monetization
-[crashlytics](http://try.crashlytics.com/) | Crash Reporter
-
-
 
 ## Todo
 
-- [x] Record and add audio files to the project.
-- [ ] Convert to Kotlin
-- [ ] Replace Gradle with Koin
-- [ ] Add About page and quote licences
-- [ ] Change Icon
-- [ ] Better Architecture and use of LiveData
-- [ ] Unit Tests
+- [ ] Create Baseline Profiles
+- [ ] Maestro Tests
+
+## Resources
+```Catherine Ryu, Mandarin Tone Perception & Production Team, and Michigan State University Libraries. Tone Perfect: Multimodal Database for Mandarin Chinese. Accessed 1 January 2022. https://tone.lib.msu.edu/```
 
 ## Licenses
 

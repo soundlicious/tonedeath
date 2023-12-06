@@ -1,0 +1,103 @@
+[versions]
+
+
+agp = "8.2.0"
+androidTools = "31.2.0"
+androidxComposeRuntimeTracing = "1.0.0-beta01"
+androidx-constraintlayout-compose = "1.1.0-alpha13"
+androidx-core-testing = "2.2.0"
+androidx-hilt-navigation-compose = "1.1.0"
+androidxLifecycle = "2.7.0-rc01"
+androidx-test-ext-junit = "1.1.5"
+androidx-window = "1.2.0-beta03"
+androidxComposeCompiler = "1.5.5"
+appcompat = "1.6.1"
+hilt = "2.48.1"
+hiltExt = "1.1.0"
+compose = "2023.10.01"
+compose-activity = "1.8.1"
+compose-navigation = "2.7.5"
+compose-viewmodel = "2.6.2"
+core-ktx = "1.12.0"
+espresso-core = "3.5.1"
+junit = "4.13.2"
+kermit = "2.0.2"
+kotlin = "1.9.10"
+kotlinxCoroutines = "1.7.3"
+ksp = "1.9.20-1.0.14"
+org-jetbrains-kotlin-android = "1.9.20"
+org-junit-jupiter = "5.8.1"
+org-jetbrains-kotlin-jvm = "1.9.20"
+material = "1.10.0"
+
+[libraries]
+androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose" }
+androidx-compose-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
+androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
+androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
+androidx-compose-material-iconsExtended = { group = "androidx.compose.material", name = "material-icons-extended" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-material3-windowSizeClass = { group = "androidx.compose.material3", name = "material3-window-size-class" }
+androidx-compose-materialWindow = { module = "androidx.compose.material3:material3-window-size-class" }
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "compose-navigation" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+androidx-compose-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata" }
+androidx-compose-runtime-tracing = { group = "androidx.compose.runtime", name = "runtime-tracing", version.ref = "androidxComposeRuntimeTracing" }
+androidx-compose-ui-test = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-util = { group = "androidx.compose.ui", name = "ui-util" }
+androidx-compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "compose-viewmodel" }
+androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "androidx-constraintlayout-compose" }
+androidx-core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "androidx-core-testing" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "org-junit-jupiter" }
+kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
+ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
+logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+
+[plugins]
+
+
+com-android-application = { id = "com.android.application", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kapt = { id = "org.jetbrains.kotlin.kapt" }
+kotlin-parcelize = { id = "kotlin-parcelize" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
+com-android-library = { id = "com.android.library", version.ref = "agp" }
+
+# Project convention plugins
+tonedeath-android-application = { id = "tonedeath.android.application", version = "unspecified" }
+tonedeath-android-application-compose = { id = "tonedeath.android.application.compose", version = "unspecified" }
+tonedeath-android-feature = { id = "tonedeath.android.feature", version = "unspecified" }
+tonedeath-android-library = { id = "tonedeath.android.library", version = "unspecified" }
+tonedeath-android-library-compose = { id = "tonedeath.android.library.compose", version = "unspecified" }
+tonedeath-android-hilt = { id = "tonedeath.android.hilt", version = "unspecified" }
+tonedeath-jvm-library = { id = "tonedeath.jvm.library", version = "unspecified" }
+
+[bundles]
+
+

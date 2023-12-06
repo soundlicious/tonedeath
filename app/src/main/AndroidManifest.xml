@@ -1,70 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="dev.expositopablo.tonedeath">
-
-    <uses-permission android:name="android.permission.INTERNET" />
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:name=".ToneDeathApplication"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/MintTheme"
-        tools:replace="android:icon">
-        <activity android:name=".main.MainActivity">
+        android:name=".ToneDeathApp"
+        tools:targetApi="31" >
+        <activity android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="${fabric_api_key}" />
-
-        <activity android:name=".practice.PracticeActivity"
-            android:parentActivityName=".main.MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".learning.InitFinalListActivity"
-            android:label="@string/title_initfinal_list"
-            android:parentActivityName=".main.MainActivity"
-            android:theme="@style/MintTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.main.MainActivity" />
-        </activity>
-        <activity
-            android:name=".learning.InitFinalDetailActivity"
-            android:label="@string/title_initfinal_detail"
-            android:parentActivityName=".learning.InitFinalListActivity"
-            android:theme="@style/MintTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
-        </activity>
-        <activity android:name=".learning.ListeningActivity"
-            android:parentActivityName=".learning.InitFinalListActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.expositopablo.tonedeath.learning.InitFinalListActivity" />
-        </activity>
-
-        <receiver android:name=".uselesswidget.UselessWidget">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/useless_widget_info" />
-        </receiver>
     </application>
 
 </manifest>
