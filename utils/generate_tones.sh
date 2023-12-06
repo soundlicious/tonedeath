@@ -6,10 +6,9 @@ destination_directory="$parent_dir//app//src//main//res//raw//"
 
 # Check if the destination directory exists
 if [[ ! -d "${destination_directory}" ]]; then
-    echo "Directory '${destination_directory}' does not exist."
-    exit 1
+    echo "Directory '${destination_directory}' does not exist => Creating it"
+    mkdir -p "$destination_directory"
 fi
-
 # List of tones to match
 tones=("tone1" "tone2" "tone3" "tone4")
 
