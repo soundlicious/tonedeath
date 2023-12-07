@@ -1,13 +1,12 @@
 package dev.pabloexposito.practice
 
-import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import dev.pabloexposito.navigation.PracticeGraph
 
-fun NavGraphBuilder.practiceGraph(windowSizeClass: WindowSizeClass) {
+fun NavGraphBuilder.practiceGraph() {
     navigation(startDestination = PracticeScreen.path, route = PracticeGraph.path) {
         gameOverDestination()
-        practiceDestination(windowSizeClass.widthSizeClass)
+        practiceDestination()
     }
 }

@@ -24,8 +24,10 @@ internal fun Project.configureAndroidCompose(
         dependencies {
             val bom = libs.findLibrary("androidx-compose-bom").get()
             add("implementation", platform(bom))
+            add("implementation", libs.findLibrary("kotlinx.collections.immutable").get())
             add("androidTestImplementation", platform(bom))
             add("implementation", libs.findLibrary("androidx.compose.runtime").get())
+            add("lintChecks", libs.findLibrary("compose.lint.checks").get())
         }
 
         testOptions {

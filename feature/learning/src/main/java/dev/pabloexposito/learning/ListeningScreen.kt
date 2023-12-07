@@ -128,7 +128,7 @@ private fun PinYinListening(
 
 @DevicePreviews
 @Composable
-fun ListeningViewPreview() {
+private fun ListeningViewPreview() {
     AppTheme {
         PinYinListening(
             AppPinYinRepository().getRandomPinyin(),

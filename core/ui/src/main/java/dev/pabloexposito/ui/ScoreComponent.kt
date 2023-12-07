@@ -30,7 +30,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
-fun ScoreComponent(modifier: Modifier = Modifier, score: Int) {
+fun ScoreComponent(score: Int, modifier: Modifier = Modifier) {
     var offset by remember {
         mutableFloatStateOf(0f)
     }
@@ -91,7 +91,7 @@ fun ScoreComponent(modifier: Modifier = Modifier, score: Int) {
 
 @Preview
 @Composable
-fun ScoreComponentPreview() {
+private fun ScoreComponentPreview() {
     AppTheme {
         ScoreComponent(score = 1)
     }

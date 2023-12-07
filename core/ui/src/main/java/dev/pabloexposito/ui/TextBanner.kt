@@ -19,7 +19,7 @@ import dev.pabloexposito.designsystem.theme.material_color_deep_purple_700
 import dev.pabloexposito.designsystem.theme.material_color_pink_700
 
 @Composable
-fun TextBanner(modifier: Modifier = Modifier, text: String) {
+fun TextBanner(text: String, modifier: Modifier = Modifier) {
     Box(modifier = modifier) {
         Text(
             modifier = Modifier
@@ -58,7 +58,7 @@ fun TextBanner(modifier: Modifier = Modifier, text: String) {
 
 @Preview
 @Composable
-fun TextBannerPreview() {
+private fun TextBannerPreview() {
     AppTheme {
         TextBanner(
             text = "Listen to the difference between these tones",

@@ -13,10 +13,12 @@ import androidx.compose.ui.unit.dp
 import dev.pabloexposito.data.repository.AppPinYinRepository
 import dev.pabloexposito.ui.PinYinCard
 import dev.pabloexposito.ui.DevicePreviews
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 
 @Composable
-internal fun PinYinMasterLearningPane(modifier: Modifier = Modifier, inits : List<String>, onListItemClick: (element: String) -> Unit) {
+internal fun PinYinMasterLearningPane(inits : ImmutableList<String>, modifier: Modifier = Modifier, onListItemClick: (element: String) -> Unit) {
     LazyVerticalGrid(
         modifier = modifier,
         contentPadding = PaddingValues(16.dp),
@@ -34,8 +36,8 @@ internal fun PinYinMasterLearningPane(modifier: Modifier = Modifier, inits : Lis
 
 @DevicePreviews
 @Composable
-fun PreviewInitScreen() {
+private fun PreviewInitScreen() {
     AppTheme {
-        PinYinMasterLearningPane(inits = AppPinYinRepository().getInitials(), modifier = Modifier.fillMaxWidth()) {}
+        PinYinMasterLearningPane(inits = AppPinYinRepository().getInitials().toImmutableList(), modifier = Modifier.fillMaxWidth()) {}
     }
 }

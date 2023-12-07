@@ -23,10 +23,10 @@ import dev.pabloexposito.designsystem.theme.material_color_red_700
 
 @Composable
 fun ToneCard(
-    modifier: Modifier = Modifier,
     tone: Tone,
+    modifier: Modifier = Modifier,
     forceColor: Color? = null,
-    onToneClick: (() -> Unit)?
+    onToneClick: (() -> Unit)? = null,
 ) {
     val (icon, color) = when (tone) {
         Tone.TONE1 -> Pair(
@@ -75,9 +75,9 @@ fun ToneCard(
 
 @Preview
 @Composable
-fun ToneCardPreview(@PreviewParameter(TonePreviewParameterProvider::class) tone: Tone) {
+private fun ToneCardPreview(@PreviewParameter(TonePreviewParameterProvider::class) tone: Tone) {
     AppTheme {
-        ToneCard(tone = tone) {}
+        ToneCard(tone = tone, onToneClick = null)
     }
 }
 

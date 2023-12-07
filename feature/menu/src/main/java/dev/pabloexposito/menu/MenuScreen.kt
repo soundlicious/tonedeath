@@ -76,8 +76,8 @@ private fun MenuRoute(
 
 @Composable
 private fun LandscapeMenu(
-    modifier: Modifier = Modifier,
     onLearningClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onPracticeClick: () -> Unit,
 ) {
     Box(modifier = modifier) {
@@ -113,7 +113,7 @@ private fun LandscapeMenu(
 
 @LandscapeDevicePreviews
 @Composable
-fun LandscapeMenuPreview() {
+private fun LandscapeMenuPreview() {
     AppTheme {
         LandscapeMenu(modifier = Modifier.fillMaxSize(), onLearningClick = {}, onPracticeClick = {})
     }
@@ -121,8 +121,8 @@ fun LandscapeMenuPreview() {
 
 @Composable
 private fun PortraitMenu(
-    modifier: Modifier = Modifier,
     onLearningClick: () -> Unit,
+    modifier: Modifier = Modifier,
     onPracticeClick: () -> Unit,
 ) {
     Column(
@@ -159,7 +159,7 @@ private fun PortraitMenu(
 
 @PortraitDevicePreviews
 @Composable
-fun PortraitMenuPreview() {
+private fun PortraitMenuPreview() {
     AppTheme {
         PortraitMenu(modifier = Modifier.fillMaxSize(), onLearningClick = {}, onPracticeClick = {})
     }
@@ -167,9 +167,9 @@ fun PortraitMenuPreview() {
 
 @Composable
 private fun MenuButton(
-    modifier: Modifier = Modifier,
     title: String,
     painter: Painter,
+    modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
     FilledIconButton(

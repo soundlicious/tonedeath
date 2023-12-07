@@ -17,10 +17,11 @@ import dev.pabloexposito.designsystem.theme.pinyinColorList
 fun PinYinCard(
     init: String,
     index: Int,
+    modifier: Modifier = Modifier,
     fixColor: Color? = null,
     onClick: (element: String) -> Unit
 ) {
-    Card(modifier = Modifier.aspectRatio(1f).bouncingClickable { onClick(init) }) {
+    Card(modifier = modifier.aspectRatio(1f).bouncingClickable { onClick(init) }) {
         AutoSizeText(
             modifier = Modifier
                 .fillMaxSize()
@@ -35,7 +36,7 @@ fun PinYinCard(
 
 @Preview
 @Composable
-fun PinYinCardPreview() {
+private fun PinYinCardPreview() {
     AppTheme {
         PinYinCard("ang", 0) {}
     }

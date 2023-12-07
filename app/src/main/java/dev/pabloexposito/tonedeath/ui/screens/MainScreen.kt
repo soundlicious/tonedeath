@@ -2,6 +2,7 @@ package dev.pabloexposito.tonedeath.ui.screens
 
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,7 +15,6 @@ import dev.pabloexposito.designsystem.theme.AppTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -34,10 +34,12 @@ import dev.pabloexposito.practice.practiceGraph
 import dev.pabloexposito.tonedeath.AppNavigator
 import dev.pabloexposito.tonedeath.R
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainMenuScreen(navigator: AppNavigator, windowSizeClass: WindowSizeClass) {
+fun MainRoute(
+    navigator: AppNavigator,
+    windowSizeClass: WindowSizeClass,
+    modifier: Modifier = Modifier
+) {
     val navController = rememberNavController()
     var backPressedDispatcher =
         LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
@@ -66,63 +68,68 @@ fun MainMenuScreen(navigator: AppNavigator, windowSizeClass: WindowSizeClass) {
     val showBackButtonState by navigator.showBackButton.observeAsState()
     val appBarTitle by navigator.appBarTitle.observeAsState()
 
+    MainScreen(
+        title = { Text(appBarTitle ?: stringResource(id = R.string.app_name)) },
+        modifier = modifier,
+        navigationIcon = {
+            if (showBackButtonState == true)
+                TopLevelNavigation { navigator.navigateUp() }
+        },
+        content = { contentPadding ->
+            NavHost(
+                navController = navController,
+                startDestination = MenuGraph.path,
+                modifier = Modifier.padding(contentPadding)
+            ) {
+                practiceGraph()
+                menuGraph()
+                learningGraph(windowSizeClass)
+            }
+        }
+    )
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun MainScreen(
+    title: @Composable () -> Unit,
+    navigationIcon: @Composable () -> Unit,
+    modifier: Modifier = Modifier,
+    content: @Composable (PaddingValues) -> Unit
+) {
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         topBar = {
             TopAppBar(
-                title = { Text(appBarTitle ?: stringResource(id = R.string.app_name)) },
+                title = title,
                 modifier = Modifier
                     .fillMaxWidth(),
-                navigationIcon = if (showBackButtonState == true) {
-                    {
-                        IconButton(onClick = { navigator.navigateUp() }) {
-                            Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
-                        }
-                    }
-                } else {
-                    {}
-                }
+                navigationIcon = navigationIcon
             )
-        }) { contentPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = MenuGraph.path,
-            modifier = Modifier.padding(contentPadding)
-        ) {
-            practiceGraph(windowSizeClass)
-            menuGraph()
-            learningGraph(windowSizeClass)
-        }
+        },
+        content = content
+    )
+}
+
+@Composable
+private fun TopLevelNavigation(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
+        Icon(
+            imageVector = Icons.Filled.ArrowBack,
+            contentDescription = stringResource(R.string.back_navigation)
+        )
     }
 }
 
-@OptIn(ExperimentalMaterial3WindowSizeClassApi::class, ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun MainMenuScreenPreview() {
+private fun MainMenuScreenPreview() {
     AppTheme {
-        Scaffold(
+        MainScreen(
+            title = {},
+            navigationIcon = {},
             modifier = Modifier.fillMaxSize(),
-            topBar = {
-                TopAppBar(
-                    title = { Text("ToneDeath") },
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    navigationIcon = if (true) {
-                        {
-                            IconButton(onClick = { }) {
-                                Icon(
-                                    imageVector = Icons.Filled.ArrowBack,
-                                    contentDescription = "Back"
-                                )
-                            }
-                        }
-                    } else {
-                        {}
-                    }
-                )
-            }) {
-
-        }
+            content = {}
+        )
     }
 }

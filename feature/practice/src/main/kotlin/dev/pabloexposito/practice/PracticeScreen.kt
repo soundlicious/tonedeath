@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import dev.pabloexposito.designsystem.theme.AppTheme
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -36,18 +35,17 @@ data object PracticeScreen : BaseScreen.Screen {
 }
 
 
-internal fun NavGraphBuilder.practiceDestination(windowWidthSizeClass: WindowWidthSizeClass) {
+internal fun NavGraphBuilder.practiceDestination() {
     composable(
         route = PracticeScreen.path,
         arguments = listOf(),
     ) {
-        PracticeRoute(windowWidthSizeClass)
+        PracticeRoute()
     }
 }
 
 @Composable
 private fun PracticeRoute(
-    windowWidthSizeClass: WindowWidthSizeClass,
     viewModel: PracticeViewModel = hiltViewModel()
 ) {
     val currentScore by viewModel.score.observeAsState(0)
@@ -55,7 +53,6 @@ private fun PracticeRoute(
 
     PracticeView(
         configuration = LocalConfiguration.current,
-        windowWidthSizeClass = windowWidthSizeClass,
         score = currentScore,
         displayToneButtons = displayButton,
         onPlayClick = { viewModel.onPlayEvent() }
@@ -65,7 +62,6 @@ private fun PracticeRoute(
 @Composable
 private fun PracticeView(
     configuration: Configuration,
-    windowWidthSizeClass: WindowWidthSizeClass,
     score: Int,
     displayToneButtons: Boolean,
     onPlayClick: () -> Unit,
@@ -136,14 +132,14 @@ private fun ColumnLayout(
 ) {
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         PracticeTopComponent(
-            Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
             score = score,
             onPlayClick = onPlayClick
         )
         ToneCardsDisplay(
-            Modifier
+            modifier = Modifier
                 .apply {
                     if (toneCardsLayout == ToneCardsLayout.GRID) {
                         aspectRatio(1f)
@@ -178,11 +174,10 @@ private fun ColumnLayout(
     group = "light"
 )
 @Composable
-fun PracticeScreenPreview(@PreviewParameter(WindowWidthSizePreviewParameterProvider::class) widthSizeClassPreview: WindowWidthSizeClassPreview) {
+private fun PracticeScreenPreview(@PreviewParameter(WindowWidthSizePreviewParameterProvider::class) widthSizeClassPreview: WindowWidthSizeClassPreview) {
     AppTheme {
         PracticeView(
             configuration = LocalConfiguration.current,
-            windowWidthSizeClass = widthSizeClassPreview.value,
             score = 1,
             displayToneButtons = true,
             onPlayClick = { }

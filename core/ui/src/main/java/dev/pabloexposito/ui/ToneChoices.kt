@@ -30,10 +30,10 @@ import dev.pabloexposito.model.data.Tone
 
 @Composable
 fun ToneCardsDisplay(
-    modifier: Modifier = Modifier,
     displayButtons: Boolean,
+    modifier: Modifier = Modifier,
     toneCardsLayout: ToneCardsLayout = ToneCardsLayout.GRID,
-    onToneClick: ((tone: Tone) -> Unit)?,
+    onToneClick: ((tone: Tone) -> Unit)? = null
 ) {
     Box(modifier) {
         val tones = Tone.values().asList()
@@ -108,7 +108,7 @@ fun ToneCardsDisplay(
     group = "light"
 )
 @Composable
-fun ToneChoicePreview(@PreviewParameter(ToneCardsLayoutPreviewProvider::class) toneCardsLayout: ToneCardsLayout) {
+private fun ToneChoicePreview(@PreviewParameter(ToneCardsLayoutPreviewProvider::class) toneCardsLayout: ToneCardsLayout) {
     AppTheme {
         ToneCardsDisplay(
             modifier = Modifier.fillMaxSize(),

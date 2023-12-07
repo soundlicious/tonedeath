@@ -23,12 +23,15 @@ espresso-core = "3.5.1"
 junit = "4.13.2"
 kermit = "2.0.2"
 kotlin = "1.9.10"
+kotlinter = "4.1.0"
+kotlinxCollections = "0.3.6"
 kotlinxCoroutines = "1.7.3"
 ksp = "1.9.20-1.0.14"
 org-jetbrains-kotlin-android = "1.9.20"
 org-junit-jupiter = "5.8.1"
 org-jetbrains-kotlin-jvm = "1.9.20"
 material = "1.10.0"
+slackComposeLintCheck = "1.2.0"
 
 [libraries]
 androidx-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "compose-activity" }
@@ -59,6 +62,7 @@ androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "life
 androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+compose-lint-checks = { group = "com.slack.lint.compose", name = "compose-lint-checks", version.ref = "slackComposeLintCheck" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
@@ -70,6 +74,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "org-junit-jupiter" }
 kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlinx-collections-immutable = { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollections" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 logging-kermit = { group = "co.touchlab", name = "kermit", version.ref = "kermit" }
@@ -78,17 +83,14 @@ android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", ver
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 
 [plugins]
-
-
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-kapt = { id = "org.jetbrains.kotlin.kapt" }
 kotlin-parcelize = { id = "kotlin-parcelize" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
 com-android-library = { id = "com.android.library", version.ref = "agp" }
-
+kotlinter = { id = "org.jmailen.kotlinter", version.ref = "kotlinter" }
 # Project convention plugins
 tonedeath-android-application = { id = "tonedeath.android.application", version = "unspecified" }
 tonedeath-android-application-compose = { id = "tonedeath.android.application.compose", version = "unspecified" }

@@ -22,6 +22,8 @@ import dev.pabloexposito.ui.PinYinCard
 import dev.pabloexposito.designsystem.theme.material_color_light_blue_700
 import dev.pabloexposito.navigation.BaseScreen.Screen
 import dev.pabloexposito.navigation.ScreenParams
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 internal data class LearningDetailsScreenParameters(
     val init: String,
@@ -58,7 +60,7 @@ internal fun LearningDetailsRoute(
 ) {
     PinYinDetailsLearningPane(
         modifier = Modifier.fillMaxSize(),
-        finals = viewModel.details
+        finals = viewModel.details.toImmutableList()
     ) { final ->
         viewModel.onFinalSelected(final)
     }
@@ -66,8 +68,8 @@ internal fun LearningDetailsRoute(
 
 @Composable
 internal fun PinYinDetailsLearningPane(
+    finals: ImmutableList<String>,
     modifier: Modifier = Modifier,
-    finals: List<String>,
     onFinalSelected: (final: String) -> Unit
 ) {
     LazyVerticalGrid(
@@ -78,7 +80,7 @@ internal fun PinYinDetailsLearningPane(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         itemsIndexed(finals) { index, final ->
-            PinYinCard(final, index, material_color_light_blue_700) {
+            PinYinCard(init = final, index = index, fixColor = material_color_light_blue_700) {
                 onFinalSelected(final)
             }
         }
@@ -87,11 +89,11 @@ internal fun PinYinDetailsLearningPane(
 
 @Preview
 @Composable
-fun PreviewDetailScreen() {
+private fun PreviewDetailScreen() {
     AppTheme {
         PinYinDetailsLearningPane(
             modifier = Modifier.fillMaxSize(),
-            finals = AppPinYinRepository().getFinalsByInitials("zh")
+            finals = AppPinYinRepository().getFinalsByInitials("zh").toImmutableList()
         ) {}
     }
 }

@@ -6,4 +6,5 @@
     <string name="practice_screen_name">Practice</string>
     <string name="learning_details_screen_name">Learning : final"</string>
     <string name="game_over_screen_name">You\'re dead, deal with it</string>
+    <string name="back_navigation">Back</string>
 </resources>

@@ -18,7 +18,7 @@ import dev.pabloexposito.designsystem.theme.material_color_deep_purple_500
 import dev.pabloexposito.designsystem.theme.material_color_pink_700
 
 @Composable
-fun PracticeTopComponent(modifier: Modifier = Modifier, score: Int, onPlayClick: () -> Unit) {
+fun PracticeTopComponent(score: Int, modifier: Modifier = Modifier, onPlayClick: () -> Unit) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
@@ -71,7 +71,7 @@ fun PracticeTopComponent(modifier: Modifier = Modifier, score: Int, onPlayClick:
 
 @Preview
 @Composable
-fun PracticeTopComponentPreview() {
+private fun PracticeTopComponentPreview() {
     AppTheme {
         PracticeTopComponent(score = 1) {}
     }

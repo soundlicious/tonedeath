@@ -33,7 +33,7 @@ fun SelectedPinYin(pinyin: Pinyin, modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun SelectedPinYinPreview() {
+private fun SelectedPinYinPreview() {
     AppTheme {
         SelectedPinYin(pinyin = Pinyin("zh", "ang"))
     }

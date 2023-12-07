@@ -15,9 +15,9 @@ import dev.pabloexposito.designsystem.theme.material_color_red_700
 
 @Composable
 fun RowToneComparison(
-    modifier: Modifier = Modifier,
     goodTone: Tone,
     badTone: Tone,
+    modifier: Modifier = Modifier,
     onToneSelected: (tone: Tone) -> Unit
 ) {
     Row(modifier = modifier) {
@@ -40,9 +40,9 @@ fun RowToneComparison(
 
 @Composable
 fun ColumnToneComparison(
-    modifier: Modifier = Modifier,
     goodTone: Tone,
     badTone: Tone,
+    modifier: Modifier = Modifier,
     onToneSelected: (tone: Tone) -> Unit
 ) {
     Column(modifier = modifier) {
@@ -65,7 +65,7 @@ fun ColumnToneComparison(
 
 @Preview
 @Composable
-fun ColumnToneComparisonPreview() {
+private fun ColumnToneComparisonPreview() {
     AppTheme {
         ColumnToneComparison(
             modifier = Modifier
@@ -78,7 +78,7 @@ fun ColumnToneComparisonPreview() {
 
 @Preview
 @Composable
-fun RowToneComparisonPreview() {
+private fun RowToneComparisonPreview() {
     AppTheme {
         RowToneComparison(
             modifier = Modifier

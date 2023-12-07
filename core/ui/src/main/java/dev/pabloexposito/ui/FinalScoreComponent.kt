@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun FinalScore(modifier: Modifier = Modifier, finalScore: Int) {
+fun FinalScore(finalScore: Int, modifier: Modifier = Modifier) {
     val duration = 1000
     val transition = rememberInfiniteTransition(label = "")
     val translationY by transition.animateFloat(
@@ -77,7 +77,7 @@ fun FinalScore(modifier: Modifier = Modifier, finalScore: Int) {
 
 @Preview
 @Composable
-fun FinalScorePreview() {
+private fun FinalScorePreview() {
     AppTheme {
         FinalScore(
             finalScore = 0, modifier = Modifier

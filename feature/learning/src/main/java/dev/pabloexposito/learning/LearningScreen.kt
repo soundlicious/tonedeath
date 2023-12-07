@@ -22,6 +22,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import dev.pabloexposito.navigation.BaseScreen
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 data object LearningScreen : BaseScreen.Screen {
     override val root: String
@@ -48,24 +50,24 @@ private fun LearningRoute(
     var details: String? by rememberSaveable {
         mutableStateOf(null)
     }
-    val finals: List<String> by remember {
+    val finals: ImmutableList<String> by remember {
         derivedStateOf {
-            details?.let { detail ->
+            (details?.let { detail ->
                 learningViewModel.getFinals(detail)
-            } ?: emptyList()
+            } ?: emptyList()).toImmutableList()
         }
     }
-    val distinctInitials: List<String> = learningViewModel.getDistinctInitials()
+    val distinctInitials: ImmutableList<String> = learningViewModel.getDistinctInitials().toImmutableList()
 
     when (value) {
         WindowWidthSizeClass.Medium,
         WindowWidthSizeClass.Expanded -> {
             Row(modifier = Modifier.fillMaxWidth()) {
                 PinYinMasterLearningPane(
-                    Modifier
+                    modifier = Modifier
                         .fillMaxSize()
                         .weight(1f),
-                    distinctInitials,
+                    inits = distinctInitials,
                     onListItemClick = {
                         details = it
                     })

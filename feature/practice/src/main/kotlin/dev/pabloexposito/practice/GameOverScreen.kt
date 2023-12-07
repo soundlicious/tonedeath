@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
@@ -130,11 +131,11 @@ private fun GameOverRoute(
 
 @Composable
 private fun GameOver(
-    modifier: Modifier = Modifier,
     isLandscape: Boolean,
     score: Int,
     goodTone: Tone,
     badTone: Tone,
+    modifier: Modifier = Modifier,
     onToneSelected: (tone: Tone) -> Unit
 ) {
     if (isLandscape) {
@@ -151,7 +152,7 @@ private fun GameOver(
                 )
             }
             TextBanner(
-                text = "Listen to the difference between these tones",
+                text = stringResource(R.string.game_over_listen_tone_difference),
                 modifier = Modifier
                     .fillMaxHeight()
                     .weight(0.3f)
@@ -177,7 +178,7 @@ private fun GameOver(
                     .weight(0.3f)
             )
             TextBanner(
-                text = "Listen to the difference between these tones",
+                text = stringResource(R.string.game_over_listen_tone_difference),
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(0.3f)
