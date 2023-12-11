@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="menu_learning">LEARNING</string>
+    <string name="menu_practice">PRACTICE</string>
+    <string name="menu_best_score">Best score: %1$s</string>
+</resources>

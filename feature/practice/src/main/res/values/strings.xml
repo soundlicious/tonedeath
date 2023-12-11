@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="practice_score">Score :</string>
+    <string name="game_over_listen_tone_difference">Listen to the difference between these tones</string>
+</resources>
